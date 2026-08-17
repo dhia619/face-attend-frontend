@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiosk</title>
+	<link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/kiosk.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="icon" type="image/png" href="./assets/face-scan.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  	<header class="header">
+        <img src="./assets/extra_it.png" width="70px">
+    	<p class="clock" id="clock">--:--:--</p>
+  	</header>
+
+  	<main>
+		<div class="recognition-container">
+			<h2 class="device-name" id="device-name"></h2>
+			
+			<div class="camera-box">
+				  <video id="video" autoplay muted playsinline></video>
+				  <p class="no-camera" id="noCamera">Camera not available</p>
+			</div>
+
+			<div class="message-box" id="messageBox">
+				  <p class="employee-name" id="employeeName"></p>
+				  <p class="action-text" id="actionText"></p>
+				  <p class="time-text" id="timeText"></p>
+			</div>
+		</div>
+		<div class="action-loader hidden" id="loading"></div>
+  	</main>
+	
+	<script type="module" src="./js/kiosk.js"></script>
+  	<script src="./js/clock.js"></script>
+</body>
+</html>

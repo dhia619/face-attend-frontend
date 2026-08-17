@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activate Device</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/activation.css">
+    <link rel="icon" type="image/png" href="./assets/face-scan.png">
+</head>
+
+<body>
+
+    <header class="header">
+        <img src="./assets/extra_it.png" width="70" alt="Logo">
+    </header>
+
+    <div class="activation-container">
+
+        <div class="activation-card" id="activation-card">
+            <div class="activation-header">
+                <div class="activation-logo">
+                    <div class="action-loader hidden" id="activation-loader"></div>
+                    <div class="activation-logo-square" id="activation-logo-square"></div>
+                </div>
+                <h2>Activate Kiosk</h2>
+                <p>
+                    Enter the activation code provided by your administrator
+                    to register this device and connect it to the Face
+                    Attendance system.
+                </p>
+            </div>
+            <form class="activation-form" id="activation-form" novalidate>
+                <div class="form-group" id="activation-code-group">
+                    <label for="activation-code" class="form-label">
+                        Activation Code
+                    </label>
+                    <div class="input-wrapper">
+                        <input
+                            class="form-control"
+                            type="text"
+                            id="activation-code"
+                            name="activation-code"
+                            required
+                            autocomplete="off"
+                            placeholder="XXXX-XXXX-XXXX"
+                            maxlength="14">
+                    </div>
+                    <span class="error-message" id="activation-code-error"></span>
+                </div>
+
+
+                <button type="submit" id="activation-button" class="main-button">
+                    <span class="button-text">
+                        ACTIVATE DEVICE
+                    </span>
+                </button>
+            </form>
+        </div>
+
+        <div class="activation-success-card hidden" id="activation-success-card">
+            <p class="main-instruction-text">
+                Device activated successfully
+            </p>
+            <p class="secondary-instruction-text">
+                Preparing your kiosk...
+            </p>
+            <div class="action-loader"></div>
+        </div>
+
+        <div class="choose-device hidden" id="choose-device">
+            <p class="main-instruction-text">
+                Select the camera you want to use for face recognition
+            </p>
+
+            <div class="form-group" id="camera-group">
+                <label for="camera-select" class="form-label">
+                    Camera
+                </label>
+                <div class="input-wrapper" id="camera-input-wrapper">
+                    <select id="camera-select" class="form-control">
+                        <option value="" disabled selected>
+                            Choose a camera
+                        </option>
+                    </select>
+                </div>
+                <span class="error-message" id="camera-error">
+                    Please select a camera
+                </span>
+            </div>
+
+            <div class="camera-preview-wrapper hidden" id="camera-preview-wrapper">
+                <video id="camera-preview" autoplay playsinline muted
+                ></video>
+            </div>
+
+            <p class="secondary-instruction-text">
+                Make sure the selected camera is connected and positioned correctly.
+            </p>
+
+            <button type="button" class="main-button" id="confirm-camera-button">
+                <span class="button-text">
+                    Proceed
+                </span>
+            </button>
+        </div>
+
+    </div>
+
+    <script
+        type="module"
+        src="./js/activation.js"
+    ></script>
+
+</body>
+
+</html>
