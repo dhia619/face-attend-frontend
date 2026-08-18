@@ -1,408 +1,261 @@
 import { CONFIG } from './config.js';
 import { api } from './api.js';
 
+document.addEventListener('DOMContentLoaded', async () => {
 
-document.addEventListener('DOMContentLoaded', () => {
+    const activationCard = document.getElementById('activation-card');
+    const activationSuccessCard = document.getElementById('activation-success-card');
+    const chooseDeviceContainer = document.getElementById('choose-device');
+    const devicesDropdown = document.getElementById('camera-select');
+    const cameraInputWrapper = document.getElementById('camera-input-wrapper');
+    const cameraError = document.getElementById('camera-error');
+    const proceedButton = document.getElementById('confirm-camera-button');
+    const cameraPreview = document.getElementById('camera-preview');
+    const cameraPreviewWrapper = document.getElementById('camera-preview-wrapper');
+    let cameraStream = null;
 
-    /*
-    if (localStorage.getItem(CONFIG.STORAGE_KEYS.ACCESS_TOKEN)) {
+    const accessToken = localStorage.getItem(CONFIG.STORAGE_KEYS.ACCESS_TOKEN);
+    const deviceId = localStorage.getItem(CONFIG.STORAGE_KEYS.DEVICE_ID);
+
+    const finalizationSuccessCard = document.getElementById('finalization-success-card');
+    
+    if (accessToken && deviceId) {
+        console.log("ba3be3i !!")
         window.location.href = 'kiosk.html';
         return;
     }
-    */
 
-    const form = document.getElementById('activation-form');
+    if (accessToken && !deviceId) {
+        await showConfigDevice();
+        return;
+    }
 
-    const codeInput = document.getElementById('activation-code');
+    initActivationFlow();
 
-    const activationButton = document.getElementById('activation-button');
+    function initActivationFlow() {
 
-    const activationError = document.getElementById(
-        'activation-code-error'
-    );
+        const form = document.getElementById('activation-form');
+        const codeInput = document.getElementById('activation-code');
+        const codeInputWrapper = document.getElementById('activation-code-input-wrapper');
+        const activationButton = document.getElementById('activation-button');
+        const activationError = document.getElementById('activation-code-error');
+
+        codeInput.addEventListener('input', (e) => {
+            e.target.value = e.target.value
+                .toUpperCase()
+                .replace(/\s+/g, '');
+
+            hideActivationError();
+        });
 
 
-    const activationCard = document.getElementById(
-        'activation-card'
-    );
+        form.addEventListener('submit', async (e) => {
 
-    const activationSuccessCard = document.getElementById(
-        'activation-success-card'
-    );
+            e.preventDefault();
+            const code = codeInput.value.trim();
+
+            if (!code) {
+                showActivationError('Please enter an activation code.');
+                return;
+            }
+
+            if (code.length !== 14) {
+                showActivationError('Activation code must be 14 characters long.');
+                return;
+            }
 
 
-    const chooseDeviceContainer = document.getElementById(
-        'choose-device'
-    );
+            if (!/^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(code)) {
+                showActivationError('Activation code format is XXXX-XXXX-XXXX.');
+                return;
+            }
 
-    const devicesDropdown = document.getElementById(
-        'camera-select'
-    );
+            hideActivationError();
+            setLoading(true);
 
-    const cameraInputWrapper = document.getElementById(
-        'camera-input-wrapper'
-    );
+            try {
+                await activateDevice(code);
+                showActivationSuccess();
+            } catch (err) {
+                showActivationError(err.message);
+                setLoading(false);
+            }
+        });
 
-    const cameraError = document.getElementById(
-        'camera-error'
-    );
-
-    const proceedButton = document.getElementById(
-        'confirm-camera-button'
-    );
-
-    const cameraPreview = document.getElementById(
-        'camera-preview'
-    );
-
-    const cameraPreviewWrapper = document.getElementById(
-        'camera-preview-wrapper'
-    );
-
-let cameraStream = null;
-
-    codeInput.addEventListener('input', (e) => {
-
-        e.target.value = e.target.value
-            .toUpperCase()
-            .replace(/\s+/g, '');
-
-        hideActivationError();
-    });
-
-    form.addEventListener('submit', async (e) => {
-
-        e.preventDefault();
-        const code = codeInput.value.trim();
-
-        if (!code) {
-            showActivationError(
-                'Please enter an activation code.'
-            );
-            return;
+        function showActivationError(message) {
+            codeInputWrapper.classList.add('input-error');
+            activationError.textContent = message;
+            activationError.classList.add('show');
         }
 
-        if (code.length !== 14) {
-            showActivationError(
-                'Activation code must be 14 characters long.'
-            );
-            return;
+        function hideActivationError() {
+            activationError.textContent = '';
+            activationError.classList.remove('show');
+            codeInputWrapper.classList.remove('input-error');
         }
 
-        if (
-            !/^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(code)
-        ) {
-            showActivationError(
-                'Activation code format is XXXX-XXXX-XXXX.'
-            );
-            return;
+        function setLoading(isLoading) {
+            const loader = document.getElementById('activation-loader');
+            const square = document.getElementById('activation-logo-square');
+            activationButton.disabled = isLoading;
+            loader.classList.toggle('hidden', !isLoading);
+            square.classList.toggle('hidden', isLoading);
         }
+    }
 
-        hideActivationError();
-        setLoading(true);
-        /*
-        try {
+    async function activateDevice(code) {
 
-            const data = await api.post(
-                '/devices/activate',
-                {
-                    activation_code: code
-                }
-            );
-
-
-            localStorage.setItem(
-                CONFIG.STORAGE_KEYS.ACCESS_TOKEN,
-                data.access_token
-            );
-
-
-            localStorage.setItem(
-                CONFIG.STORAGE_KEYS.REFRESH_TOKEN,
-                data.refresh_token
-            );
-
-
-            showActivationSuccess();
-
-        } catch (err) {
-
-            showActivationError(err.message);
-
-            setLoading(false);
-
-        }
-        */
-        showActivationSuccess();
-
-    });
-
-    devicesDropdown.addEventListener('change', async () => {
-
-        if (!devicesDropdown.value) return;
-
-        clearCameraError();
-
-        try {
-
-            await startCameraPreview(
-                devicesDropdown.value
-            );
-        } catch (error) {
-            console.error(
-                'Could not start camera preview:',
-                error
-            );
-            cameraError.textContent =
-                'Unable to start the selected camera.';
-            showCameraError();
-        }
-    });
-
-    proceedButton.addEventListener('click', () => {
-
-        const selectedCamera = devicesDropdown.value;
-
-
-        if (!selectedCamera) {
-
-            showCameraError();
-
-            return;
-        }
-
-
-        clearCameraError();
-
-
-        console.log(
-            'Selected camera:',
-            selectedCamera
+        const data = await api.post(
+            '/devices/activate',
+            {
+                activation_code: code
+            }
         );
 
-
-        // Example: store selected camera
         localStorage.setItem(
-            'selected_camera_id',
-            selectedCamera
+            CONFIG.STORAGE_KEYS.ACCESS_TOKEN,
+            data.access_token
         );
 
-
-        // Continue to kiosk
-        // window.location.href = 'kiosk.html';
-
-    });
-
-    function showActivationError(message) {
-        activationError.textContent = message;
-        activationError.classList.add('show');
-    }
-
-
-    function hideActivationError() {
-        activationError.textContent = '';
-        activationError.classList.remove('show');
-    }
-
-    function showCameraError() {
-        cameraInputWrapper.classList.add(
-            'input-error'
+        localStorage.setItem(
+            CONFIG.STORAGE_KEYS.REFRESH_TOKEN,
+            data.refresh_token
         );
-        cameraError.classList.add(
-            'show'
-        );
-    }
-
-
-    function clearCameraError() {
-
-        cameraInputWrapper.classList.remove(
-            'input-error'
-        );
-
-        cameraError.classList.remove(
-            'show'
-        );
-
-    }
-
-    function setLoading(isLoading) {
-
-        const loader = document.getElementById(
-            'activation-loader'
-        );
-
-        const square = document.getElementById(
-            'activation-logo-square'
-        );
-
-
-        activationButton.disabled = isLoading;
-
-        loader.classList.toggle(
-            'hidden',
-            !isLoading
-        );
-
-        square.classList.toggle(
-            'hidden',
-            isLoading
-        );
-
     }
 
     function showActivationSuccess() {
-
-        activationCard.classList.add(
-            'hidden'
-        );
-
-        activationSuccessCard.classList.remove(
-            'hidden'
-        );
-
-
+        activationCard.classList.add('hidden');
+        activationSuccessCard.classList.remove('hidden');
         setTimeout(() => {
-
-            activationSuccessCard.classList.add(
-                'hidden'
-            );
-
+            activationSuccessCard.classList.add('hidden');
             showConfigDevice();
-
-        }, 1500);
-
+        }, 2000);
     }
 
     async function showConfigDevice() {
-
-        chooseDeviceContainer.classList.remove(
-            'hidden'
-        );
-
+        activationCard.classList.add('hidden');
+        chooseDeviceContainer.classList.remove('hidden');
 
         try {
-
             await loadCameras();
-
+            initCameraFlow();
         } catch (error) {
-
-            console.error(
-                'Could not load cameras:',
-                error
-            );
-
-
-            cameraError.textContent =
-                'Unable to access camera devices.';
-
+            console.error('Could not load cameras:', error);
+            cameraError.textContent ='Unable to access camera devices.';
             showCameraError();
-
         }
+    }
 
+    function initCameraFlow() {
+
+        devicesDropdown.addEventListener('change', async () => {
+                if (!devicesDropdown.value) {
+                    return;
+                }
+                clearCameraError();
+                try {
+                    await startCameraPreview(devicesDropdown.value);
+                } catch (error) {
+                    console.error('Could not start camera preview:', error);
+                    cameraError.textContent = 'Unable to start the selected camera.';
+                    showCameraError();
+                }
+            }
+        );
+
+        proceedButton.addEventListener('click',() => {
+                const selectedCamera = devicesDropdown.value;
+                if (!selectedCamera) {
+                    showCameraError();
+                    return;
+                }
+                clearCameraError();
+                localStorage.setItem(
+                    CONFIG.STORAGE_KEYS.DEVICE_ID,
+                    selectedCamera
+                );
+                showFinalizationSuccess();
+                setTimeout(() => {
+                    window.location.href = 'kiosk.html';
+                }, 2000)
+            }
+        );
+    }
+
+    function showFinalizationSuccess() {
+        chooseDeviceContainer.classList.add('hidden');
+        finalizationSuccessCard.classList.remove('hidden');
     }
 
     async function loadCameras() {
 
         const cameras = await getCameras();
-
-
-        // Clear old options
         devicesDropdown.innerHTML = '';
-
-
-        // Add placeholder
-        const placeholder = document.createElement(
-            'option'
-        );
-
+        const placeholder = document.createElement('option');
         placeholder.value = '';
-
-        placeholder.textContent =
-            'Choose a camera';
-
+        placeholder.textContent = 'Choose a camera';
         placeholder.disabled = true;
-
         placeholder.selected = true;
+        devicesDropdown.appendChild(placeholder);
 
-
-        devicesDropdown.appendChild(
-            placeholder
-        );
-
-
-        // No cameras found
         if (cameras.length === 0) {
-
-            placeholder.textContent =
-                'No cameras found';
-
+            placeholder.textContent = 'No cameras found';
             return;
         }
 
-
-        // Add cameras
-        cameras.forEach(
-            (camera, index) => {
-                const option =
-                    document.createElement(
-                        'option'
-                    );
-                option.value = camera.deviceId;
-                option.textContent = camera.label || `Camera ${index + 1}`;
-                devicesDropdown.appendChild(option);
-            }
-        );
-
+        cameras.forEach((camera, index) => {
+            const option = document.createElement('option');
+            option.value = camera.deviceId;
+            option.textContent = camera.label || `Camera ${index + 1}`;
+            devicesDropdown.appendChild(option);
+        });
     }
 
     async function getCameras() {
 
-        // Ask permission first so browser
-        // can expose camera labels.
-        const stream =
-            await navigator.mediaDevices.getUserMedia({
-                video: true
-            });
-
-        // We only needed the stream
-        // to obtain permission.
+        const stream = await navigator.mediaDevices.getUserMedia({video: true});
         stream.getTracks().forEach(track => track.stop());
-        const devices =
-            await navigator.mediaDevices.enumerateDevices();
 
-        return devices.filter(
-            device =>
-                device.kind === 'videoinput'
-        );
+        const devices = await navigator.mediaDevices.enumerateDevices();
 
+        return devices.filter(device => device.kind === 'videoinput');
     }
 
     async function startCameraPreview(deviceId) {
 
         stopCameraPreview();
-        cameraStream =
-            await navigator.mediaDevices.getUserMedia({
-                video: {
-                    deviceId: {
-                        exact: deviceId
-                    }
-                },
-                audio: false
-            });
+
+        cameraStream = await navigator.mediaDevices.getUserMedia({
+            video: {
+                deviceId: {
+                    exact: deviceId
+                }
+            },
+            audio: false
+        });
 
         cameraPreview.srcObject = cameraStream;
-        cameraPreviewWrapper.classList.remove(
-            'hidden'
-        );
-
+        cameraPreviewWrapper.classList.remove('hidden');
     }
 
     function stopCameraPreview() {
-        if (!cameraStream) return;
+
+        if (!cameraStream) {
+            return;
+        }
         cameraStream.getTracks().forEach(track => track.stop());
         cameraStream = null;
         cameraPreview.srcObject = null;
+    }
+
+    function showCameraError() {
+        cameraInputWrapper.classList.add('input-error');
+        cameraError.classList.add('show');
+    }
+
+    function clearCameraError() {
+        cameraInputWrapper.classList.remove('input-error');
+        cameraError.classList.remove('show');
     }
 
 });

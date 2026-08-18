@@ -191,7 +191,7 @@ select.form-control {
     transition: opacity 0.2s ease;
 }
 
-.activation-success-card {
+.activation-success-card, .finalization-success-card{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -221,7 +221,7 @@ select.form-control {
 }
 
 .choose-device {
-    width: min(100%, 500px);
+    width: min(100%, 480px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -236,7 +236,6 @@ select.form-control {
 }
 
 #confirm-camera-button {
-    width: 50%;
     margin-bottom: 0;
 }
 

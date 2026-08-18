@@ -39,7 +39,7 @@
                     <label for="activation-code" class="form-label">
                         Activation Code
                     </label>
-                    <div class="input-wrapper">
+                    <div class="input-wrapper" id="activation-code-input-wrapper">
                         <input
                             class="form-control"
                             type="text"
@@ -107,6 +107,16 @@
                     Proceed
                 </span>
             </button>
+        </div>
+
+        <div class="finalization-success-card hidden" id="finalization-success-card">
+            <p class="main-instruction-text">
+                Finalizing device setup...
+            </p>
+            <p class="secondary-instruction-text">
+                Your kiosk is now ready to use. You will be redirected to the main page shortly.
+            </p>
+            <div class="action-loader"></div>
         </div>
 
     </div>

@@ -3,6 +3,6 @@ export const CONFIG = {
   STORAGE_KEYS: {
     ACCESS_TOKEN: "kiosk_access_token",
     REFRESH_TOKEN: "kiosk_refresh_token",
-    DEVICE_INFO: "kiosk_device_info",
-  }
+    DEVICE_ID: "kiosk_device_id",
+  },
 };
