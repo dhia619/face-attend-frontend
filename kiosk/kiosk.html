@@ -1,42 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kiosk</title>
-	<link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/kiosk.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/kiosk.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link rel="icon" type="image/png" href="./assets/face-scan.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="./assets/face-scan.png">
 </head>
+
 <body>
 
-  	<header class="header">
-        <img src="./assets/extra_it.png" width="70px">
-    	<p class="clock" id="clock">--:--:--</p>
-  	</header>
+    <header class="header kiosk-header">
+        <img src="./assets/extra_it.png" width="70" alt="Logo" >
+        <div class="header-right">
+            <div class="kiosk-status">
+                <span class="status-dot" id="status-dot"></span>
+                <span id="kiosk-status"></span>
+            </div>
+            <p class="clock" id="clock">--:--:--</p>
+        </div>
+    </header>
 
-  	<main>
-		<div class="recognition-container">
-			<h2 class="device-name" id="device-name"></h2>
-			
-			<div class="camera-box">
-				  <video id="video" autoplay muted playsinline></video>
-				  <p class="no-camera" id="noCamera">Camera not available</p>
-			</div>
+    <main class="kiosk-main">
+        <section class="recognition-container">
+			<!--
+				<div class="kiosk-heading">
+					<div>
+						<p class="kiosk-label">FACE ATTENDANCE</p>
+						<h1 class="device-name" id="device-name">Attendance Kiosk</h1>
+					</div>
+					<p class="kiosk-instruction">
+						Look directly at the camera
+					</p>
+				</div>
+			-->
 
-			<div class="message-box" id="messageBox">
-				  <p class="employee-name" id="employeeName"></p>
-				  <p class="action-text" id="actionText"></p>
-				  <p class="time-text" id="timeText"></p>
-			</div>
-		</div>
-		<div class="action-loader hidden" id="loading"></div>
-  	</main>
-	
-	<script type="module" src="./js/kiosk.js"></script>
-  	<script src="./js/clock.js"></script>
+            <div class="recognition-card">
+                <div class="camera-section">
+                    <div class="section-header">
+                        <span class="section-number">01</span>
+                        <div>
+                            <p class="section-label" id="device-name">Camera</p>
+                            <p class="section-description">
+                                Position your face inside the frame
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="camera-box">
+                        <video id="camera-preview" autoplay muted playsinline></video>
+                        <div class="camera-frame" aria-hidden="true">
+                            <span class="corner corner-top-left"></span>
+                            <span class="corner corner-top-right"></span>
+                            <span class="corner corner-bottom-left"></span>
+                            <span class="corner corner-bottom-right"></span>
+                        </div>
+
+                        <div class="camera-badge">
+                            <span class="camera-live-dot"></span>
+                            LIVE
+                        </div>
+
+                        <p class="no-camera" id="noCamera">
+                            Camera not available
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="employee-section">
+                    <div class="section-header">
+                        <span class="section-number">02</span>
+                        <div>
+                            <p class="section-label">Recognition</p>
+                            <p class="section-description">
+                                Employee attendance information
+                            </p>
+                        </div>
+                    </div>
+                    <div class="employee-panel">
+                        <div class="employee-placeholder">
+                            <div class="face-icon">
+                                <span></span>
+                            </div>
+                            <p>Waiting for recognition</p>
+                            <span>
+                                Your attendance status will appear here
+                            </span>
+                        </div>
+                        <div class="message-box" id="messageBox">
+                            <p class="employee-name" id="employeeName"></p>
+                            <p class="action-text" id="actionText"></p>
+                            <p class="time-text" id="timeText"></p>
+                        </div>
+                        <div class="action-loader hidden" id="loading"></div>
+                    </div>
+                    <div class="recognition-hint">
+                        <span class="hint-icon">i</span>
+                        <p>
+                            Stand approximately 50–100 cm from the camera
+                            and keep your face clearly visible.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script type="module" src="./js/kiosk.js"></script>
+    <script src="./js/clock.js"></script>
 </body>
 </html>

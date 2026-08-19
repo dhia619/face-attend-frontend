@@ -5,4 +5,6 @@ export const CONFIG = {
     REFRESH_TOKEN: "kiosk_refresh_token",
     DEVICE_ID: "kiosk_device_id",
   },
+  RECOGNITION_INTERVAL: 20000,
+  FAKE_LOADING_TIME: 2000
 };

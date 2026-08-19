@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         setTimeout(() => {
             activationSuccessCard.classList.add('hidden');
             showConfigDevice();
-        }, 2000);
+        }, CONFIG.FAKE_LOADING_TIME);
     }
 
     async function showConfigDevice() {
@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 showFinalizationSuccess();
                 setTimeout(() => {
                     window.location.href = 'kiosk.html';
-                }, 2000)
+                }, CONFIG.FAKE_LOADING_TIME)
             }
         );
     }
