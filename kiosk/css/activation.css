@@ -130,7 +130,7 @@ select.form-control {
 
 .error-message {
     display: block;
-    color: var(--color-error);
+    color: var(--color-red);
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
@@ -148,12 +148,12 @@ select.form-control {
 }
 
 .input-wrapper.input-error {
-    border-color: var(--color-error);
+    border-color: var(--color-red);
     animation: shake 0.3s ease-in-out;
 }
 
 .form-control.input-error {
-    border: 3px solid var(--color-error);
+    border: 3px solid var(--color-red);
 }
 
 .main-button {

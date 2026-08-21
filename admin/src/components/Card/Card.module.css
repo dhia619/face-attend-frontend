@@ -1,0 +1,22 @@
+.card {
+    width: min(100%, 400px);
+    padding: 40px;
+    background: var(--color-background);
+    border: 3px solid var(--color-black);
+    box-shadow: 8px 8px 0 var(--color-black);
+    transition:
+		transform 0.2s ease,
+		box-shadow 0.2s ease;
+}
+
+.card:hover {
+	transform: translate(-2px, -2px);
+	box-shadow: 10px 10px 0 var(--color-black);
+}
+
+@media (max-width: 480px) {
+	.card {
+		padding: 28px;
+		box-shadow: 6px 6px 0 var(--color-black);
+	}
+}

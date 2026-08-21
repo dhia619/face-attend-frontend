@@ -1,0 +1,14 @@
+.select {
+	display: block;
+	width: 100%;
+	border: none;
+	outline: none;
+	padding: 12px 16px;
+	background: transparent;
+	color: var(--color-black);
+	font: inherit;
+	font-size: 16px;
+	font-weight: 500;
+	cursor: pointer;
+	appearance: auto;
+}
