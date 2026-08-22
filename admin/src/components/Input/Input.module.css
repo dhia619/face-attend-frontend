@@ -14,3 +14,8 @@
 .input::placeholder {
   	color: var(--color-gray-light);
 }
+
+.input-wrapper.input-error {
+    border-color: var(--color-red);
+    animation: shake 0.3s ease-in-out;
+}
