@@ -1,0 +1,16 @@
+
+.main {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    margin: auto;
+}
+
+.main p {
+    font-size: 20px;
+    font-weight: bold;
+}
