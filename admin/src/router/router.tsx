@@ -5,6 +5,9 @@ import PrivateLayout from "../Layouts/PrivateLayout/PrivateLayout";
 import LoginPage from "../pages/Login/LoginPage";
 import DashboardPage from "../pages/Dashboard/DashboardPage";
 import PageNotFound from "../pages/NotFound/PageNotFound";
+import UsersListPage from "../pages/Users/UsersListPage";
+import CreateUserPage from "../pages/Users/CreateUserPage";
+import EditUserPage from "../pages/Users/EditUserPage";
 
 export const router = createBrowserRouter([
 	
@@ -27,6 +30,9 @@ export const router = createBrowserRouter([
 		children: [
 			{ index: true, element: <Navigate to="dashboard" replace /> },
 			{ path: "dashboard", Component: DashboardPage },
+			{ path: "users", Component: UsersListPage },
+			{ path: "users/new", Component: CreateUserPage },
+			{ path: "users/:id/edit", Component: EditUserPage },
 		],
 	},
 	

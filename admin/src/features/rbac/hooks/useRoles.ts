@@ -1,0 +1,42 @@
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { rolesApi } from "../api";
+import type { CreateRolePayload, UpdateRolePayload } from "../types";
+
+const ROLES_KEY = ["roles"];
+
+export function useGetRoles() {
+	return useQuery({ queryKey: ROLES_KEY, queryFn: rolesApi.list });
+}
+
+export function useGetRole(id: number) {
+	return useQuery({
+		queryKey: [...ROLES_KEY, id],
+		queryFn: () => rolesApi.getOne(id),
+		enabled: !!id,
+	});
+}
+
+export function useCreateRole() {
+	const qc = useQueryClient();
+	return useMutation({
+		mutationFn: (payload: CreateRolePayload) => rolesApi.create(payload),
+		onSuccess: () => qc.invalidateQueries({ queryKey: ROLES_KEY }),
+	});
+}
+
+export function useUpdateRole() {
+	const qc = useQueryClient();
+	return useMutation({
+		mutationFn: ({ id, payload }: { id: number; payload: UpdateRolePayload }) =>
+			rolesApi.update(id, payload),
+		onSuccess: () => qc.invalidateQueries({ queryKey: ROLES_KEY }),
+	});
+}
+
+export function useDeleteRole() {
+	const qc = useQueryClient();
+	return useMutation({
+		mutationFn: (id: number) => rolesApi.delete(id),
+		onSuccess: () => qc.invalidateQueries({ queryKey: ROLES_KEY }),
+	});
+}

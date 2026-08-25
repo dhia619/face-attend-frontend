@@ -4,12 +4,14 @@ import DataTable from "../../components/DataTable/DataTable";
 import ConfirmDialog from "../../components/ConfirmDialog/ConfirmDialog";
 import { useGetUsers, useDeleteUser } from "../../features/users/hooks/useUsers";
 import type { User } from "../../features/users/types";
-import styles from "./UsersListPage.module.css";
+import styles from "../ListPage.module.css";
+import Toast from "../../components/Toast/Toast";
 
 function UsersListPage() {
 	const { data: users = [], isLoading } = useGetUsers();
 	const deleteUser = useDeleteUser();
 	const [userToDelete, setUserToDelete] = useState<User | null>(null);
+	const [showToast, setShowToast] = useState<boolean>(false);
 
 	return (
 		<div>
@@ -46,7 +48,12 @@ function UsersListPage() {
                     )
 				}
 			/>
-
+			{showToast &&
+				<Toast 
+					message={`User deleted successfully`} 
+					onClose={() => setShowToast(false)}
+				/>
+			}
 			{userToDelete && (
 				<ConfirmDialog
 					title="Delete user"
@@ -55,11 +62,14 @@ function UsersListPage() {
 					onCancel={() => setUserToDelete(null)}
 					onConfirm={() =>
 						deleteUser.mutate(userToDelete.id, {
-							onSuccess: () => setUserToDelete(null),
+							onSuccess: () => {
+								setUserToDelete(null);
+								setShowToast(true);
+							},
 						})
 					}
-				/>
-			)}
+					/>
+				)}
 		</div>
 	);
 }

@@ -14,12 +14,15 @@
     --color-red-dark: #b91c1c;
     --color-red-light: rgba(237, 39, 39, 0.204);
     --color-blue: #2563eb;
+    --color-blue-dark: #1f2937;
+    --color-turquoise-green: #25b09b;
     
-    --color-loader: #25b09b;
+    --color-loader: var(--color-turquoise-green);
     --color-background: var(--color-white);
     --color-backdrop: rgba(0, 0, 0, 0.4);
     --color-dialog-box-shadow: rgb(0 0 0 / 0.1);
     --color-table-header: var(--color-gray-50);
     --color-table-row: var(--color-gray-light);
     --color-table-row-hover: var(--color-neutral-50);
+    --color-sidebar: var(--color-black-light);
 }
