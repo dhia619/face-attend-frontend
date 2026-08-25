@@ -1,7 +1,8 @@
-import { createContext, useContext, type ReactNode } from 'react';
+import { createContext, useContext, useState, type ReactNode } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useCurrentUser } from './hooks/useCurrentUser';
-import type { User } from './types';
+import type { User } from '../users/types';
+import { setAccessToken } from '../../api/client';
 
 interface AuthContextType {
 	user: User | null;
@@ -15,17 +16,21 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
 	const queryClient = useQueryClient();
-	const { data: user, isLoading } = useCurrentUser();
-
+	const [accessToken, setAccessTokenState] = useState(() => localStorage.getItem('accessToken'));
+	const { data: user, isLoading } = useCurrentUser(accessToken);
 	const setSession = (accessToken: string, refreshToken: string) => {
 		localStorage.setItem('accessToken', accessToken);
 		localStorage.setItem('refreshToken', refreshToken);
+		setAccessToken(accessToken);
+		setAccessTokenState(accessToken);
 		queryClient.invalidateQueries({ queryKey: ['auth', 'me'] });
 	};
 
 	const clearSession = () => {
 		localStorage.removeItem('accessToken');
 		localStorage.removeItem('refreshToken');
+		setAccessToken(null);
+		setAccessTokenState(null);
 		queryClient.clear();
 	};
 

@@ -1,8 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { authApi } from "../api";
 
-export const useCurrentUser = () => {
-	const token = localStorage.getItem("accessToken");
+export const useCurrentUser = (accessToken: string | null) => {
 
 	return useQuery({
 		queryKey: ["auth", "me"],
@@ -10,7 +9,7 @@ export const useCurrentUser = () => {
 			const res = await authApi.getMe();
 			return res.data;
 		},
-		enabled: !!token,
+		enabled: !!accessToken,
 		retry: false,
 	});
 };

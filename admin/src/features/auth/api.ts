@@ -1,5 +1,6 @@
 import { apiClient } from '../../api/client';
-import type { LoginPayload, LoginResponse, User } from './types';
+import type { LoginPayload, LoginResponse } from './types';
+import type { User } from "../users/types";
 
 export const authApi = {
     login: (payload: LoginPayload) =>
@@ -10,7 +11,4 @@ export const authApi = {
 
     getMe: () =>
         apiClient.get<User>('/auth/me'),
-
-    refreshToken: () =>
-        apiClient.post<LoginResponse>('/auth/refresh'),
 };
