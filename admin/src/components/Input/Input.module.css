@@ -12,7 +12,7 @@
 }
 
 .input::placeholder {
-  	color: var(--color-gray-light);
+  	color: var(--color-gray);
 }
 
 .input-wrapper.input-error {
