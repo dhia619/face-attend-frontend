@@ -6,14 +6,13 @@ import FormField from "../../components/FormField/FormField";
 import Input from "../../components/Input/Input";
 
 import { useLogin } from "../../features/auth/hooks/useLogin";
-import { FormError } from "../../components/FormError/FormError";
+import FormError from "../../components/FormError/FormError";
 
 function LoginPage() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [emailError, setEmailError] = useState("");
 	const [passwordError, setPasswordError] = useState("");
-
 
 	const login = useLogin();
 
