@@ -5,8 +5,6 @@ import { useAuth } from "../../features/auth/AuthContext";
 
 function PublicLayout() {
 	const { isAuthenticated, isLoading } = useAuth();
-	
-	console.log(isAuthenticated, isLoading); 
 
 	if (isLoading) {
         return (
