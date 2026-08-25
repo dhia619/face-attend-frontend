@@ -1,0 +1,28 @@
+.menuItem {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+
+	padding: 9px 10px;
+
+	border: 0;
+	border-radius: 7px;
+	background: transparent;
+
+	color: var(--color-gray-dark)/*#374151*/;
+	font-size: 13px;
+	font-weight: 500;
+
+	cursor: pointer;
+	text-align: left;
+
+	transition:
+		background-color 0.15s ease,
+		color 0.15s ease;
+}
+
+.menuItem:hover {
+	background: var(--color-gray-light)/*#f7f8fa*/;
+	color: var(--color-black-light);
+}

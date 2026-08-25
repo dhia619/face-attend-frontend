@@ -1,0 +1,47 @@
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.title {
+	font-size: 20px;
+	font-weight: 600;
+	color: var(--color-gray-dark)/*#111827*/;
+	margin: 0;
+}
+
+.dashboardButton {
+	padding: 8px 16px;
+	background: var(--color-black);
+	color: var(--color-white);
+	border-radius: 3px;
+	font-size: 13px;
+	font-weight: 500;
+	text-decoration: none;
+	transition: 0.3s;
+}
+
+.dashboardButton:hover {
+	background-color: var(--color-gray-dark);
+}
+
+.editLink,
+.deleteLink {
+	font-size: 13px;
+	font-weight: 500;
+	background: none;
+	border: none;
+	cursor: pointer;
+	margin-left: 12px;
+	text-decoration: none;
+}
+
+.editLink {
+	color: var(--color-blue);
+}
+
+.deleteLink {
+	color: var(--color-red);
+}
