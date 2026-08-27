@@ -38,11 +38,11 @@
 }
 
 .actionsHeader {
-	text-align: right;
+	text-align: left !important;
 }
 
 .actionsCell {
-	text-align: right;
+	text-align: left;
 	white-space: nowrap;
 }
 
@@ -54,4 +54,10 @@
 	background: var(--color-white);
 	border: 1px solid var(--color-gray-light)/*#e5e7eb*/;
 	border-radius: 12px;
+}
+
+.center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
