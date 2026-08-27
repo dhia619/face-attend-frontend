@@ -1,7 +1,7 @@
 import Toast from "../../../components/Toast/Toast";
 import RoleForm from "../components/RoleForm";
 
-import styles from "./RoleManagementPage.module.css";
+import styles from "../../../styles/ManagementPage.module.css";
 
 import { useCreateRole } from "../../rbac/hooks/useRoles";
 

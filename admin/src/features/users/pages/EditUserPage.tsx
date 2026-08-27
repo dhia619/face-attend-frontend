@@ -2,7 +2,7 @@ import { useParams } from "react-router";
 import { useGetRoles } from "../../rbac/hooks/useRoles";
 import { useGetUser, useUpdateUser } from "../hooks/useUsers";
 
-import styles from "./UserManagement.module.css";
+import styles from "../../../styles/ManagementPage.module.css";
 
 import Loader from "../../../components/Loader/Loader";
 import Toast from "../../../components/Toast/Toast";
@@ -55,7 +55,7 @@ function EditUserPage() {
                 />
             )}
 
-            <p className={styles.title}>Edit user</p>
+            <p className={styles.title}>Edit User</p>
 
             <Card>
                 <UserForm

@@ -3,7 +3,7 @@ import Toast from "../../../components/Toast/Toast";
 import Card from "../../../components/Card/Card";
 import UserForm from "../components/UserForm";
 
-import styles from "./UserManagement.module.css";
+import styles from "../../../styles/ManagementPage.module.css";
 
 import { useGetRoles } from "../../rbac/hooks/useRoles";
 import { useCreateUser } from "../hooks/useUsers";
@@ -40,7 +40,7 @@ function CreateUserPage() {
                 />
             )}
 
-            <p className={styles.title}>Create new user</p>
+            <p className={styles.title}>Create new User</p>
 
             <Card>
                 <UserForm

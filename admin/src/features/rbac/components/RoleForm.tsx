@@ -7,7 +7,7 @@ import ButtonLoader from "../../../components/ButtonLoader/ButtonLoader";
 import Card from "../../../components/Card/Card";
 import PermissionMatrixTable from "./PermissionMatrixTable";
 
-import styles from "../pages/RoleManagementPage.module.css";
+import styles from "../../../styles/ManagementPage.module.css";
 
 import type { Permission, PermissionRow } from "../types";
 import { useGetPermissions } from "../hooks/usePermissions";

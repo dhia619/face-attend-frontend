@@ -1,0 +1,26 @@
+
+export interface Employee {
+    id: number
+    full_name: string
+    department_id: number
+    email: string
+    phone: string
+    hire_date: string
+}
+
+export interface CreateEmployeePayload {
+    full_name: string
+    department_id: number
+    email: string
+    phone: string
+    hire_date: string
+    face_image: string
+}
+
+export interface UpdateEmployeePayload {
+    full_name: string
+    department_id: number
+    email: string
+    phone: string
+    hire_date: string
+}

@@ -7,6 +7,7 @@ import Input from "../../components/Input/Input";
 
 import { useLogin } from "../../features/auth/hooks/useLogin";
 import FormError from "../../components/FormError/FormError";
+import ButtonLoader from "../../components/ButtonLoader/ButtonLoader";
 
 function LoginPage() {
 	const [email, setEmail] = useState("");
@@ -61,7 +62,7 @@ function LoginPage() {
 				</FormField>
 
 				<Button type="submit" disabled={login.isPending}>
-					{login.isPending ? "Logging in..." : "Login"}
+					{login.isPending ? <ButtonLoader /> : "Login"}
 				</Button>
 
 				{login.isError && <FormError message={login?.error?.response?.data?.detail || "Login error, try again."} />}

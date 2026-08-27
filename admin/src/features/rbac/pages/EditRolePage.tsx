@@ -1,7 +1,7 @@
 import Toast from "../../../components/Toast/Toast";
 import RoleForm from "../components/RoleForm";
 
-import styles from "./RoleManagementPage.module.css";
+import styles from "../../../styles/ManagementPage.module.css";
 
 import { useGetRolePermissions, useUpdateRole, useGetRole } from "../../rbac/hooks/useRoles";
 import { useParams } from "react-router";
@@ -54,7 +54,7 @@ function EditRolePage() {
                 />
             )}
 
-            <p className={styles.title}>Edit role</p>
+            <p className={styles.title}>Edit Role</p>
 
             <RoleForm
                 mode="edit"

@@ -30,3 +30,14 @@
     display: flex;
     gap: 20px;
 }
+
+.imagePreview {
+    max-width: 400px;
+    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    .imagePreview {
+        max-width: 300px;
+    }
+}

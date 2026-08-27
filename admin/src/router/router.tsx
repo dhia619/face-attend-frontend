@@ -11,6 +11,9 @@ import EditUserPage from "../features/users/pages/EditUserPage";
 import CreateRolePage from "../features/rbac/pages/CreateRolePage";
 import EditRolePage from "../features/rbac/pages/EditRolePage";
 import RolesListPage from "../features/rbac/pages/RolesListPage";
+import EmployeesListPage from "../features/employees/pages/EmployeesListPage";
+import CreateEmployeePage from "../features/employees/pages/CreateEmployeePage";
+import EditEmployeePage from "../features/employees/pages/EditEmployeePage";
 
 export const router = createBrowserRouter([
 	
@@ -39,6 +42,9 @@ export const router = createBrowserRouter([
 			{ path: "roles", Component: RolesListPage },
 			{ path: "roles/new", Component: CreateRolePage },
 			{ path: "roles/:id/edit", Component: EditRolePage },
+			{ path: "employees", Component: EmployeesListPage },
+			{ path: "employees/new", Component: CreateEmployeePage },
+			{ path: "employees/:id/edit", Component: EditEmployeePage },
 		],
 	},
 	

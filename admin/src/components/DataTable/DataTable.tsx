@@ -51,6 +51,7 @@ function DataTable<T extends Record<string, any>>({
 							{columns.map((col) => (
 								<td key={col.key}>
 									{col.render ? col.render(row) : row[col.key]}
+									{row[col.key] === null ? "-" : ""}
 								</td>
 							))}
 							{actions && <td className={styles.actionsCell}>{actions(row)}</td>}
