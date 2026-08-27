@@ -40,3 +40,11 @@ export function useDeleteRole() {
 		onSuccess: () => qc.invalidateQueries({ queryKey: ROLES_KEY }),
 	});
 }
+
+export function useGetRolePermissions(id: number) {
+	return useQuery({
+		queryKey: [...ROLES_KEY, id, "permissions"],
+		queryFn: () => rolesApi.getPermissions(id),
+		enabled: !!id,
+	});
+}

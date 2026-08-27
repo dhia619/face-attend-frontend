@@ -16,6 +16,11 @@
     --color-blue: #2563eb;
     --color-blue-dark: #1f2937;
     --color-turquoise-green: #25b09b;
+    --color-gray-border: #cbd5e1;
+    --color-table-border: #f1f5f9;
+    --color-text-dark: #1e293b;
+    --color-text-medium: #334155;
+    --color-text-muted: #475569;
     
     --color-loader: var(--color-turquoise-green);
     --color-background: var(--color-white);

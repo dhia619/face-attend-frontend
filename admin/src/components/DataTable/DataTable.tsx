@@ -25,7 +25,9 @@ function DataTable<T extends Record<string, any>>({
 	actions,
 }: DataTableProps<T>) {
 	if (isLoading) {
-		return <Loader />;
+		return (<div className={styles.center}>
+			<Loader />;
+		</div>)
 	}
 
 	if (rows.length === 0) {

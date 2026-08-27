@@ -1,17 +1,19 @@
 import { useState } from "react";
 import { Link } from "react-router";
-import DataTable from "../../components/DataTable/DataTable";
-import ConfirmDialog from "../../components/ConfirmDialog/ConfirmDialog";
-import { useGetUsers, useDeleteUser } from "../../features/users/hooks/useUsers";
-import type { User } from "../../features/users/types";
-import styles from "../ListPage.module.css";
-import Toast from "../../components/Toast/Toast";
+
+import DataTable from "../../../components/DataTable/DataTable";
+import ConfirmDialog from "../../../components/ConfirmDialog/ConfirmDialog";
+import Toast from "../../../components/Toast/Toast";
+
+import { useGetUsers, useDeleteUser } from "../../../features/users/hooks/useUsers";
+import type { User } from "../../../features/users/types";
+
+import styles from "../../../styles/ListPage.module.css";
 
 function UsersListPage() {
 	const { data: users = [], isLoading } = useGetUsers();
 	const deleteUser = useDeleteUser();
 	const [userToDelete, setUserToDelete] = useState<User | null>(null);
-	const [showToast, setShowToast] = useState<boolean>(false);
 
 	return (
 		<div>
@@ -40,7 +42,7 @@ function UsersListPage() {
                             </Link>
                             <button
                                 className={styles.deleteLink}
-                                onClick={() => {console.log(user);setUserToDelete(user)}}
+                                onClick={() => {setUserToDelete(user)}}
                             >
                                 Delete
                             </button>
@@ -48,11 +50,9 @@ function UsersListPage() {
                     )
 				}
 			/>
-			{showToast &&
-				<Toast 
-					message={`User deleted successfully`} 
-					onClose={() => setShowToast(false)}
-				/>
+			{
+				deleteUser.isSuccess &&
+				<Toast message={"User deleted successfully"} />
 			}
 			{userToDelete && (
 				<ConfirmDialog
@@ -64,7 +64,6 @@ function UsersListPage() {
 						deleteUser.mutate(userToDelete.id, {
 							onSuccess: () => {
 								setUserToDelete(null);
-								setShowToast(true);
 							},
 						})
 					}

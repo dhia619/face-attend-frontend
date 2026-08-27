@@ -1,0 +1,32 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.formLabel {
+    font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+    color: var(--color-black);
+}
+
+.formButtonsContainer {
+    display: flex;
+    gap: 20px;
+}

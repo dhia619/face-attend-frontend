@@ -1,0 +1,81 @@
+.tableWrapper {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--color-gray-border);
+    border-radius: 8px;
+    background-color: var(--color-white);
+}
+
+.matrixTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.matrixTable th,
+.matrixTable td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--color-table-border);
+}
+
+.matrixTable tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.matrixTable tbody tr:hover {
+    background-color: var(--color-table-row-hover);
+}
+
+.resourceHeader {
+    text-align: left;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    background-color: var(--color-table-header);
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+}
+
+.actionHeader {
+    text-align: center;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    background-color: var(--color-table-header);
+    text-transform: capitalize;
+    font-size: 13px;
+    width: 100px;
+}
+
+.resourceCell {
+    text-align: left;
+    font-weight: 500;
+    color: var(--color-text-dark);
+    text-transform: capitalize;
+}
+
+.resourceNameBtn {
+    background: none;
+    border: none;
+    padding: 0;
+    font-weight: 600;
+    color: var(--color-text-medium);
+    cursor: pointer;
+    font-size: 14px;
+    text-transform: capitalize;
+    font-family: inherit;
+}
+
+.resourceNameBtn:hover {
+    color: var(--color-turquoise-green);
+    text-decoration: underline;
+}
+
+.checkboxCell {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.emptyCell {
+    text-align: center;
+    color: var(--color-gray-border);
+}

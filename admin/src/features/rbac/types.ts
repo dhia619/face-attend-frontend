@@ -11,8 +11,20 @@ export interface CreateRolePayload {
 
 export interface UpdateRolePayload {
     name: string
+    permission_ids: Array<number> | undefined
 }
 
 export interface AssignPermissions {
     permission_ids: Array<number>
 }
+
+export interface Permission {
+    id: number
+    code: string
+}
+
+export type PermissionRow = {
+    module: string;
+    read?: Permission;
+    write?: Permission;
+};

@@ -5,9 +5,12 @@ import PrivateLayout from "../Layouts/PrivateLayout/PrivateLayout";
 import LoginPage from "../pages/Login/LoginPage";
 import DashboardPage from "../pages/Dashboard/DashboardPage";
 import PageNotFound from "../pages/NotFound/PageNotFound";
-import UsersListPage from "../pages/Users/UsersListPage";
-import CreateUserPage from "../pages/Users/CreateUserPage";
-import EditUserPage from "../pages/Users/EditUserPage";
+import UsersListPage from "../features/users/pages/UsersListPage";
+import CreateUserPage from "../features/users/pages/CreateUserPage";
+import EditUserPage from "../features/users/pages/EditUserPage";
+import CreateRolePage from "../features/rbac/pages/CreateRolePage";
+import EditRolePage from "../features/rbac/pages/EditRolePage";
+import RolesListPage from "../features/rbac/pages/RolesListPage";
 
 export const router = createBrowserRouter([
 	
@@ -33,6 +36,9 @@ export const router = createBrowserRouter([
 			{ path: "users", Component: UsersListPage },
 			{ path: "users/new", Component: CreateUserPage },
 			{ path: "users/:id/edit", Component: EditUserPage },
+			{ path: "roles", Component: RolesListPage },
+			{ path: "roles/new", Component: CreateRolePage },
+			{ path: "roles/:id/edit", Component: EditRolePage },
 		],
 	},
 	

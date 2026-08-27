@@ -7,6 +7,7 @@ const navItems = [
 	{ to: "/employees", label: "Employees" },
 	{ to: "/attendance", label: "Attendance" },
 	{ to: "/devices", label: "Devices" },
+	{ to: "/roles", label: "Roles" }
 ];
 
 type SidebarProps = {
@@ -30,8 +31,8 @@ function Sidebar({ isOpen, onClose }: SidebarProps) {
 						<path
 							d="M6 6L18 18M18 6L6 18"
 							stroke="currentColor"
-							stroke-width="2"
-							stroke-linecap="round"
+							strokeWidth="2"
+							strokeLinecap="round"
 						/>
 					</svg>
 				</button>
