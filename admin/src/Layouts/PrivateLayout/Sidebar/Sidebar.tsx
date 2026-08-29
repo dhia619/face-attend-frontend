@@ -4,10 +4,11 @@ import styles from "./Sidebar.module.css";
 const navItems = [
 	{ to: "/dashboard", label: "Dashboard" },
 	{ to: "/users", label: "Users" },
+	{ to: "/departments", label: "Departments"},
 	{ to: "/employees", label: "Employees" },
-	{ to: "/attendance", label: "Attendance" },
+	{ to: "/roles", label: "Roles" },
 	{ to: "/devices", label: "Devices" },
-	{ to: "/roles", label: "Roles" }
+	{ to: "/attendance", label: "Attendance" },
 ];
 
 type SidebarProps = {

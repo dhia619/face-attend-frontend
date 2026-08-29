@@ -15,6 +15,9 @@ import EmployeesListPage from "../features/employees/pages/EmployeesListPage";
 import CreateEmployeePage from "../features/employees/pages/CreateEmployeePage";
 import EditEmployeePage from "../features/employees/pages/EditEmployeePage";
 import UpdateEmployeeFacePage from "../features/employees/pages/UpdateEmployeeFacePage";
+import DepartmentsListPage from "../features/departments/pages/DepartmentsListPage";
+import CreateDepartmentPage from "../features/departments/pages/CreateDepartmentsPage";
+import EditDepartmentPage from "../features/departments/pages/EditDepartmentPage";
 
 export const router = createBrowserRouter([
 	
@@ -47,6 +50,10 @@ export const router = createBrowserRouter([
 			{ path: "employees/new", Component: CreateEmployeePage },
 			{ path: "employees/:id/edit", Component: EditEmployeePage },
 			{ path: "employees/:id/face-image", Component: UpdateEmployeeFacePage },
+			{ path: "departments", Component: DepartmentsListPage },
+			{ path: "departments/new", Component: CreateDepartmentPage },
+			{ path: "departments/:id/edit", Component: EditDepartmentPage },
+
 		],
 	},
 	
