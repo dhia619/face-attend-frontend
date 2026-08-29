@@ -24,3 +24,7 @@ export interface UpdateEmployeePayload {
     phone: string
     hire_date: string
 }
+
+export interface CreateEmbeddingPayload {
+    face_image: string
+}

@@ -29,19 +29,64 @@
 
 .editLink,
 .deleteLink {
-	font-size: 13px;
-	font-weight: 500;
-	background: none;
-	border: none;
-	cursor: pointer;
-	margin-left: 12px;
-	text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 6px 12px;
+    margin-left: 8px;
+
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1;
+
+    border: 1px solid transparent;
+    border-radius: 3px;
+    background: transparent;
+
+    cursor: pointer;
+    text-decoration: none;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.1s ease;
 }
 
 .editLink {
-	color: var(--color-blue);
+    background-color: var(--color-pacific-blue);
+    color: var(--color-blue-dark);
+    border: 1px solid var(--color-pacific-blue);
+}
+
+.editLink:hover {
+    background-color: var(--color-blue);
+    color: var(--color-white);
+    border-color: var(--color-blue);
+}
+
+.editLink:active {
+    transform: translateY(1px);
 }
 
 .deleteLink {
-	color: var(--color-red);
+    color: var(--color-red);
+    border-color: currentColor;
+}
+
+.deleteLink:hover {
+    color: var(--color-white);
+    background-color: var(--color-red);
+    border-color: var(--color-red);
+}
+
+.deleteLink:active {
+    transform: translateY(1px);
+}
+
+.editLink:focus-visible,
+.deleteLink:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
 }

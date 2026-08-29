@@ -9,11 +9,14 @@ import { useGetEmployees, useDeleteEmployee } from "../../../features/employees/
 import type { Employee } from "../../../features/employees/types";
 
 import styles from "../../../styles/ListPage.module.css";
+import { useGetDepartments } from "../../departments/hooks/useDepartments";
 
 function EmployeesListPage() {
 
-	const { data: employees = [], isLoading } = useGetEmployees();
+	const { data: employees = [], isLoading: employeesLoading } = useGetEmployees();
 	const deleteEmployee = useDeleteEmployee();
+	const { data: departments = [], isLoading: departmentsLoading } = useGetDepartments();
+	
 	const [employeeToDelete, setEmployeeToDelete] = useState<Employee | null>(null);
 
 	return (
@@ -30,16 +33,26 @@ function EmployeesListPage() {
 					{ key: "full_name", header: "Name" },
 					{ key: "email", header: "Email" },
 					{ key: "phone", header: "Phone" },
-                    { key: "department_id", header: "Department"},
-                    { key: "hire_date", header: "Hire Date" },
+					{
+						key: "department_id",
+						header: "Department",
+						render: (row) =>
+						departments.find(
+							department => department.id === row.department_id
+						)?.name,
+					},
+					{ key: "hire_date", header: "Hire Date" },
 				]}
 				rows={employees}
 				rowKey={(u) => u.id}
-				isLoading={isLoading}
+				isLoading={employeesLoading && departmentsLoading}
 				emptyMessage="No employees yet."
 				actions={
                     (employee) => (
                         <>
+							<Link to={`/employees/${employee.id}/face-image`} className={styles.editLink}>
+								Face image
+                            </Link>
                             <Link to={`/employees/${employee.id}/edit`} className={styles.editLink}>
                                 Edit
                             </Link>

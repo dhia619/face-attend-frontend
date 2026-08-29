@@ -9,6 +9,12 @@
 .title {
     font-weight: bold;
     font-size: 25px;
+    text-transform: capitalize;
+}
+
+.brief {
+    font-weight: 400;
+    font-size: 16px;
 }
 
 .form {

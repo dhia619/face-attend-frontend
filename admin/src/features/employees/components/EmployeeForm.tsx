@@ -1,4 +1,4 @@
-import { useState, type SubmitEvent, type ChangeEvent } from "react";
+import { useState, type SubmitEvent } from "react";
 
 import FormField from "../../../components/FormField/FormField";
 import Input from "../../../components/Input/Input";
@@ -8,6 +8,9 @@ import ButtonLoader from "../../../components/ButtonLoader/ButtonLoader";
 import Card from "../../../components/Card/Card";
 
 import styles from "../../../styles/ManagementPage.module.css";
+import { useGetDepartments } from "../../departments/hooks/useDepartments";
+import Loader from "../../../components/Loader/Loader";
+import { useImageUpload } from "../hooks/useUploadImage";
 
 type EmployeeFormValues = {
     fullName: string;
@@ -44,7 +47,6 @@ function EmployeeForm({
     const [phoneNumber, setPhoneNumber] = useState(initialValues?.phoneNumber ?? "");
     const [departmentId, setDepartmentId] = useState(initialValues?.departmentId ?? 0);
     const [hireDate, setHireDate] = useState(initialValues?.hireDate ?? "");
-    const [faceImage, setFaceImage] = useState(initialValues?.faceImage ?? "");
     const [formIndex, setFormIndex] = useState(0);
     const [errors, setErrors] = useState<FormErrors>({
         fullName: "",
@@ -52,6 +54,9 @@ function EmployeeForm({
         phoneNumber: "",
         faceImage: ""
     });
+
+    const { data: departments, isLoading } = useGetDepartments();
+    const { image: faceImage, handleImageChange: handleFaceImageChange } = useImageUpload();
     
     function validatePersonalInfo() {
         
@@ -102,44 +107,25 @@ function EmployeeForm({
     }
 
     function handleDepartmentNext() {
-
-        setFormIndex(2);
-    }
-
-    function handleFaceImageChange(
-        e: ChangeEvent<HTMLInputElement>
-    ) {
-        const file = e.target.files?.[0];
-
-        if (!file) {
-            setFaceImage("");
+        if (mode === "create") {
+            setFormIndex(2);
             return;
         }
-
-        if (!file.type.startsWith("image/")) {
-            e.target.value = "";
-            return;
-        }
-
-        const reader = new FileReader();
-
-        reader.onload = () => {
-            if (typeof reader.result === "string") {
-                setFaceImage(reader.result);
-
-                setErrors((prev) => ({
-                    ...prev,
-                    faceImage: "",
-                }));
-            }
-        };
-
-        reader.readAsDataURL(file);
+        onSubmit({
+            fullName: fullName.trim(),
+            email: email.trim(),
+            phoneNumber: phoneNumber.trim(),
+            departmentId: departmentId || undefined,
+            hireDate: hireDate || undefined,
+        });
     }
 
     function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
         e.preventDefault();
-
+        setErrors((prev) => ({
+            ...prev,
+            faceImage: "",
+        }));
         if (mode === "create" && !faceImage) {
             setErrors((prev) => ({
                 ...prev,
@@ -157,6 +143,14 @@ function EmployeeForm({
             hireDate: hireDate || undefined,
             faceImage: faceImage || undefined,
         });
+    }
+
+    if (isLoading) {
+        return (
+            <div className={styles.main}>
+                <Loader />
+            </div>
+        )
     }
 
     return (
@@ -255,10 +249,14 @@ function EmployeeForm({
                                 )
                             }
                         >
-                            <option value={0}>
+                            <option value={-1}>
                                 Select a Department
                             </option>
-
+                            {departments?.map((department) => (
+                                <option key={department.id} value={department.id}>
+                                    {department.name}
+                                </option>
+                            ))}
                         </Select>
                     </FormField>
 
@@ -288,13 +286,13 @@ function EmployeeForm({
                             type="button"
                             onClick={handleDepartmentNext}
                         >
-                            Next
+                            {mode === "create" ? "Next" : "Confirm"}
                         </Button>
                     </div>
                 </Card>
             )}
 
-            {formIndex === 2 && (
+            {(formIndex === 2 && mode === "create" ) &&(
                 <Card>
                     <form onSubmit={handleSubmit}>
                         <FormField

@@ -61,6 +61,7 @@ function EditEmployeePage() {
                     email: employee.email,
                     phoneNumber: employee.phone,
                     departmentId: employee.department_id,
+                    hireDate: employee.hire_date
                 }}
                 isPending={updateEmployee.isPending}
                 onSubmit={(values) =>
@@ -70,7 +71,8 @@ function EditEmployeePage() {
                             full_name: values.fullName,
                             email: values.email,
                             phone: values.phoneNumber,
-                            department_id: values.departmentId
+                            department_id: values.departmentId,
+                            hire_date: values.hireDate
                         },
                     })
                 }
