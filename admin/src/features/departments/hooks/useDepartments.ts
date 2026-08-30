@@ -2,15 +2,15 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { departmentsApi } from "../api";
 import type { CreateDepartmentPayload, UpdateDepartmentPayload } from "../types";
 
-const ROLES_KEY = ["departments"];
+const DEPARTMENTS_KEY = ["departments"];
 
 export function useGetDepartments() {
-	return useQuery({ queryKey: ROLES_KEY, queryFn: departmentsApi.list });
+	return useQuery({ queryKey: DEPARTMENTS_KEY, queryFn: departmentsApi.list });
 }
 
 export function useGetDepartment(id: number) {
 	return useQuery({
-		queryKey: [...ROLES_KEY, id],
+		queryKey: [...DEPARTMENTS_KEY, id],
 		queryFn: () => departmentsApi.getOne(id),
 		enabled: !!id,
 	});
@@ -20,7 +20,7 @@ export function useCreateDepartment() {
 	const qc = useQueryClient();
 	return useMutation({
 		mutationFn: (payload: CreateDepartmentPayload) => departmentsApi.create(payload),
-		onSuccess: () => qc.invalidateQueries({ queryKey: ROLES_KEY }),
+		onSuccess: () => qc.invalidateQueries({ queryKey: DEPARTMENTS_KEY }),
 	});
 }
 
@@ -29,7 +29,7 @@ export function useUpdateDepartment() {
 	return useMutation({
 		mutationFn: ({ id, payload }: { id: number; payload: UpdateDepartmentPayload }) =>
 			departmentsApi.update(id, payload),
-		onSuccess: () => qc.invalidateQueries({ queryKey: ROLES_KEY }),
+		onSuccess: () => qc.invalidateQueries({ queryKey: DEPARTMENTS_KEY }),
 	});
 }
 
@@ -37,6 +37,6 @@ export function useDeleteDepartment() {
 	const qc = useQueryClient();
 	return useMutation({
 		mutationFn: (id: number) => departmentsApi.delete(id),
-		onSuccess: () => qc.invalidateQueries({ queryKey: ROLES_KEY }),
+		onSuccess: () => qc.invalidateQueries({ queryKey: DEPARTMENTS_KEY }),
 	});
 }
