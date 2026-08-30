@@ -10,5 +10,10 @@ export interface CreateDevicePayload {
 }
 
 export interface UpdateDevicePayload {
-    name: string
+    name: string | undefined
+    enabled: boolean | undefined
+}
+
+export interface ActivateDeviceResponse {
+    device_activation_code: string
 }

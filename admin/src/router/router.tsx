@@ -2,6 +2,7 @@ import { createBrowserRouter, Navigate } from "react-router";
 
 import PublicLayout from "../Layouts/PublicLayout/PublicLayout";
 import PrivateLayout from "../Layouts/PrivateLayout/PrivateLayout";
+
 import LoginPage from "../pages/Login/LoginPage";
 import DashboardPage from "../pages/Dashboard/DashboardPage";
 import PageNotFound from "../pages/NotFound/PageNotFound";
@@ -18,6 +19,9 @@ import UpdateEmployeeFacePage from "../features/employees/pages/UpdateEmployeeFa
 import DepartmentsListPage from "../features/departments/pages/DepartmentsListPage";
 import CreateDepartmentPage from "../features/departments/pages/CreateDepartmentsPage";
 import EditDepartmentPage from "../features/departments/pages/EditDepartmentPage";
+import DevicesListPage from "../features/devices/pages/DevicesListPage";
+import CreateDevicePage from "../features/devices/pages/CreateDevicePage";
+import EditDevicePage from "../features/devices/pages/EditDevicePage";
 
 export const router = createBrowserRouter([
 	
@@ -53,6 +57,9 @@ export const router = createBrowserRouter([
 			{ path: "departments", Component: DepartmentsListPage },
 			{ path: "departments/new", Component: CreateDepartmentPage },
 			{ path: "departments/:id/edit", Component: EditDepartmentPage },
+			{ path: "devices", Component: DevicesListPage },
+			{ path: "devices/new", Component: CreateDevicePage },
+			{ path: "devices/:id/edit", Component: EditDevicePage },
 
 		],
 	},
