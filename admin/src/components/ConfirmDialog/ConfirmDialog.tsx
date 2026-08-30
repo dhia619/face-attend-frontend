@@ -1,3 +1,4 @@
+import ButtonLoader from "../ButtonLoader/ButtonLoader";
 import styles from "./ConfirmDialog.module.css";
 
 type ConfirmDialogProps = {
@@ -19,7 +20,7 @@ function ConfirmDialog({ title, message, onConfirm, onCancel, isLoading }: Confi
 						Cancel
 					</button>
 					<button className={styles.confirmButton} onClick={onConfirm} disabled={isLoading}>
-						{isLoading ? "Deleting…" : "Delete"}
+						{isLoading ? <ButtonLoader /> : "Delete"}
 					</button>
 				</div>
 			</div>
