@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
-    const data = {}
+    let data = {}
     try {
         data = await api.get('/devices/me');
     } catch {}
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const deviceName = document.getElementById('device-name');
     const kioskStatus = document.getElementById('kiosk-status');
     deviceName.textContent = data.name;
-    kioskStatus.textContent = data.status || 'Inactive';
+    kioskStatus.textContent = data.status || 'Unknown';
 
     if (data.status !== 'active') {
         document.getElementById('status-dot').style.backgroundColor = 'red';

@@ -1,4 +1,4 @@
-@import url("./variables.css");
+@import url("../../shared/css/variables.css");
 
 .activation-container {
     width: 100%;
@@ -120,7 +120,7 @@
 }
 
 .form-control::placeholder {
-    color: var(--color-gray-light);
+    color: var(--color-gray);
 }
 
 select.form-control {

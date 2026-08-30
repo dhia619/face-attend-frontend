@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const finalizationSuccessCard = document.getElementById('finalization-success-card');
     
     if (accessToken && deviceId) {
-        console.log("ba3be3i !!")
         window.location.href = 'kiosk.html';
         return;
     }
