@@ -11,9 +11,12 @@ import type { User } from "../../../features/users/types";
 import styles from "../../../styles/ListPage.module.css";
 
 function UsersListPage() {
-	const { data: users = [], isLoading } = useGetUsers();
-	const deleteUser = useDeleteUser();
+
 	const [userToDelete, setUserToDelete] = useState<User | null>(null);
+	const [page, setPage] = useState<number>(1);
+
+	const { data: usersData, isLoading } = useGetUsers(page, import.meta.env.VITE_PAGINATION_PAGE_SIZE);
+	const deleteUser = useDeleteUser();
 
 	return (
 		<div>
@@ -30,7 +33,7 @@ function UsersListPage() {
 					{ key: "email", header: "Email" },
 					{ key: "role", header: "Role", render: (u) => u.role.name.replace("_", " ").toUpperCase() },
 				]}
-				rows={users}
+				rows={usersData?.users ?? []}
 				rowKey={(u) => u.id}
 				isLoading={isLoading}
 				emptyMessage="No users yet."
@@ -49,10 +52,26 @@ function UsersListPage() {
                         </>
                     )
 				}
+				pagination={
+					usersData ? {
+						page: page,
+						pageSize: usersData.page_size,
+						hasNext: usersData.has_next,
+						onPageChange: setPage,
+					}
+					: undefined
+				}
 			/>
 			{
 				deleteUser.isSuccess &&
 				<Toast message={"User deleted successfully"} />
+			}
+			{
+				deleteUser.isError &&
+				<Toast 
+					type="error"
+					message={deleteUser.error?.response?.data?.detail || "Failed to delete user"} 
+				/>
 			}
 			{userToDelete && (
 				<ConfirmDialog

@@ -28,3 +28,10 @@ export type PermissionRow = {
     read?: Permission;
     write?: Permission;
 };
+
+export interface ListRolesResponse {
+    roles: Role[]
+    page: number,
+    page_size: number,
+    has_next: boolean
+}

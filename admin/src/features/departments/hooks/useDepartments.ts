@@ -4,8 +4,12 @@ import type { CreateDepartmentPayload, UpdateDepartmentPayload } from "../types"
 
 const DEPARTMENTS_KEY = ["departments"];
 
-export function useGetDepartments() {
-	return useQuery({ queryKey: DEPARTMENTS_KEY, queryFn: departmentsApi.list });
+export function useListDepartments(page: number, pageSize: number) {
+	return useQuery({ queryKey: [DEPARTMENTS_KEY, page, pageSize], queryFn: () => departmentsApi.list(page, pageSize) });
+}
+
+export function useGetAllDepartments() {
+	return useQuery({ queryKey: [...DEPARTMENTS_KEY, "all"], queryFn: () => departmentsApi.getAll() });
 }
 
 export function useGetDepartment(id: number) {

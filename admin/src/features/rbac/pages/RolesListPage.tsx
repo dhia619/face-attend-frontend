@@ -5,15 +5,18 @@ import DataTable from "../../../components/DataTable/DataTable";
 import ConfirmDialog from "../../../components/ConfirmDialog/ConfirmDialog";
 import Toast from "../../../components/Toast/Toast";
 
-import { useGetRoles, useDeleteRole } from "../../../features/rbac/hooks/useRoles";
+import { useListRoles, useDeleteRole } from "../../../features/rbac/hooks/useRoles";
 import type { Role } from "../../../features/rbac/types";
 
 import styles from "../../../styles/ListPage.module.css";
 
 function RolesListPage() {
-	const { data: Roles = [], isLoading } = useGetRoles();
-	const deleteRole = useDeleteRole();
+
+	const [page, setPage] = useState<number>(1);
 	const [RoleToDelete, setRoleToDelete] = useState<Role | null>(null);
+
+	const { data: rolesData, isLoading } = useListRoles(page, import.meta.env.VITE_PAGINATION_PAGE_SIZE);
+	const deleteRole = useDeleteRole();
 
 	return (
 		<div>
@@ -28,7 +31,7 @@ function RolesListPage() {
 				columns={[
 					{ key: "name", header: "Name", render: (u) => u.name.replace("_", " ").toUpperCase() },
 				]}
-				rows={Roles}
+				rows={rolesData?.roles ?? []}
 				rowKey={(u) => u.id}
 				isLoading={isLoading}
 				emptyMessage="No Roles yet."
@@ -46,6 +49,15 @@ function RolesListPage() {
                             </button>
                         </>
                     )
+				}
+				pagination={
+					rolesData ? {
+						page: page,
+						pageSize: rolesData.page_size,
+						hasNext: rolesData.has_next,
+						onPageChange: setPage,
+					}
+					: undefined
 				}
 			/>
 			{

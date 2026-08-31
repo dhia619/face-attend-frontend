@@ -8,7 +8,7 @@ import ButtonLoader from "../../../components/ButtonLoader/ButtonLoader";
 import Card from "../../../components/Card/Card";
 
 import styles from "../../../styles/ManagementPage.module.css";
-import { useGetDepartments } from "../../departments/hooks/useDepartments";
+import { useGetAllDepartments } from "../../departments/hooks/useDepartments";
 import Loader from "../../../components/Loader/Loader";
 import { useImageUpload } from "../hooks/useUploadImage";
 
@@ -55,7 +55,7 @@ function EmployeeForm({
         faceImage: ""
     });
 
-    const { data: departments, isLoading } = useGetDepartments();
+    const { data: departments, isLoading } = useGetAllDepartments();
     const { image: faceImage, handleImageChange: handleFaceImageChange } = useImageUpload();
     
     function validatePersonalInfo() {

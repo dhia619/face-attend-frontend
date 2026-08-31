@@ -4,8 +4,12 @@ import type { CreateRolePayload, UpdateRolePayload } from "../types";
 
 const ROLES_KEY = ["roles"];
 
-export function useGetRoles() {
-	return useQuery({ queryKey: ROLES_KEY, queryFn: rolesApi.list });
+export function useListRoles(page: number, pageSize: number) {
+	return useQuery({ queryKey: [ROLES_KEY, page, pageSize], queryFn: () => rolesApi.list(page, pageSize) });
+}
+
+export function useGetAllRoles() {
+	return useQuery({ queryKey: [...ROLES_KEY, "all"], queryFn: () => rolesApi.getAll() });
 }
 
 export function useGetRole(id: number) {

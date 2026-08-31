@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import { useGetRoles } from "../../rbac/hooks/useRoles";
+import { useGetAllRoles } from "../../rbac/hooks/useRoles";
 import { useGetUser, useUpdateUser } from "../hooks/useUsers";
 
 import styles from "../../../styles/ManagementPage.module.css";
@@ -14,7 +14,7 @@ function EditUserPage() {
     const { id } = useParams();
     const userId = Number(id);
 
-    const { data: roles = [], isLoading: rolesLoading } = useGetRoles();
+    const { data: roles = [], isLoading: rolesLoading } = useGetAllRoles();
     const { data: user, isLoading: userLoading } = useGetUser(userId);
 
     const updateUser = useUpdateUser();

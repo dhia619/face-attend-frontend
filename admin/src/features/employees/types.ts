@@ -28,3 +28,10 @@ export interface UpdateEmployeePayload {
 export interface CreateEmbeddingPayload {
     face_image: string
 }
+
+export interface ListEmployeesResponse {
+    employees: Employee[]
+    page: number
+    page_size: number
+    has_next: boolean
+}

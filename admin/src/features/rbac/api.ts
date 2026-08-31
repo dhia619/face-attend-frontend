@@ -1,8 +1,18 @@
 import { apiClient } from "../../api/client";
-import type { Role, CreateRolePayload, UpdateRolePayload, Permission } from "./types";
+import type { 
+    Role, 
+    CreateRolePayload, 
+    UpdateRolePayload, 
+    Permission,
+    ListRolesResponse
+} from "./types";
 
 export const rolesApi = {
-    list: async () => (await apiClient.get<Role[]>("/rbac/roles")).data,
+    list: async (page?: number, pageSize?: number) => 
+        (await apiClient.get<ListRolesResponse>(
+            `/rbac/roles?page=${page}&page_size=${pageSize}`)
+        ).data,
+    getAll: async () => (await apiClient.get<Role[]>("/rbac/roles/all")).data,
     getOne: async (id: number) => (await apiClient.get<Role>(`/rbac/roles/${id}`)).data,
     create: async (payload: CreateRolePayload) =>
         (await apiClient.post<Role>("/rbac/roles", payload)).data,

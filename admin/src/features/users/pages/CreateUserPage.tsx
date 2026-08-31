@@ -5,11 +5,11 @@ import UserForm from "../components/UserForm";
 
 import styles from "../../../styles/ManagementPage.module.css";
 
-import { useGetRoles } from "../../rbac/hooks/useRoles";
+import { useGetAllRoles } from "../../rbac/hooks/useRoles";
 import { useCreateUser } from "../hooks/useUsers";
 
 function CreateUserPage() {
-    const { data: roles = [], isLoading } = useGetRoles();
+    const { data: roles = [], isLoading } = useGetAllRoles();
     const createUser = useCreateUser();
 
     if (isLoading) {

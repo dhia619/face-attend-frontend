@@ -17,14 +17,15 @@ import styles from "../../../styles/ListPage.module.css";
 import ActivationCodeDialog from "../components/ActivationCodeDialog";
 
 function DevicesListPage() {
-	const { data: devices = [], isLoading: devicesLoading } = useGetDevices();
-
+	
+	const [page, setPage] = useState<number>(1);
+	const [deviceToDelete, setDeviceToDelete] = useState<Device | null>(null);
+	const [activationDialogOpen, setActivationDialogOpen] = useState<boolean>(false);
+	
+	const { data: devicesData, isLoading: devicesLoading } = useGetDevices(page, import.meta.env.VITE_PAGINATION_PAGE_SIZE);
 	const deleteDevice = useDeleteDevice();
 	const regenrateActivationCode = useRegenerateDeviceActivationCode();
 
-	const [deviceToDelete, setDeviceToDelete] = useState<Device | null>(null);
-
-	const [activationDialogOpen, setActivationDialogOpen] = useState<boolean>(false);
 
 	useEffect(() => {
 		if (regenrateActivationCode.isSuccess) {
@@ -80,7 +81,7 @@ function DevicesListPage() {
 						},
 					},
 				]}
-				rows={devices}
+				rows={devicesData?.devices ?? []}
 				rowKey={(device) => device.id}
 				isLoading={devicesLoading}
 				emptyMessage="No devices yet."
@@ -109,7 +110,17 @@ function DevicesListPage() {
 							</button>
 						)}
 					</>
+					
 				)}
+				pagination={
+					devicesData ? {
+						page: page,
+						pageSize: devicesData.page_size,
+						hasNext: devicesData.has_next,
+						onPageChange: setPage,
+					}
+					: undefined
+				}
 			/>
 
 			{deleteDevice.isSuccess && (

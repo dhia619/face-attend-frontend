@@ -6,16 +6,18 @@ import ConfirmDialog from "../../../components/ConfirmDialog/ConfirmDialog";
 import Toast from "../../../components/Toast/Toast";
 
 import { useGetEmployees, useDeleteEmployee } from "../../../features/employees/hooks/useEmployees";
+import { useGetAllDepartments } from "../../departments/hooks/useDepartments";
 import type { Employee } from "../../../features/employees/types";
 
 import styles from "../../../styles/ListPage.module.css";
-import { useGetDepartments } from "../../departments/hooks/useDepartments";
 
 function EmployeesListPage() {
 
-	const { data: employees = [], isLoading: employeesLoading } = useGetEmployees();
+	const [page, setPage] = useState(1);
+
+	const { data: employeesData, isLoading: employeesLoading } = useGetEmployees(page, import.meta.env.VITE_PAGINATION_PAGE_SIZE);
 	const deleteEmployee = useDeleteEmployee();
-	const { data: departments = [], isLoading: departmentsLoading } = useGetDepartments();
+	const { data: departments = [], isLoading: departmentsLoading } = useGetAllDepartments();
 	
 	const [employeeToDelete, setEmployeeToDelete] = useState<Employee | null>(null);
 
@@ -43,9 +45,9 @@ function EmployeesListPage() {
 					},
 					{ key: "hire_date", header: "Hire Date" },
 				]}
-				rows={employees}
+				rows={employeesData?.employees ?? []}
 				rowKey={(u) => u.id}
-				isLoading={employeesLoading && departmentsLoading}
+				isLoading={employeesLoading || departmentsLoading}
 				emptyMessage="No employees yet."
 				actions={
                     (employee) => (
@@ -64,6 +66,15 @@ function EmployeesListPage() {
                             </button>
                         </>
                     )
+				}
+				pagination={
+					employeesData ? {
+						page: page,
+						pageSize: employeesData.page_size,
+						hasNext: employeesData.has_next,
+						onPageChange: setPage,
+					}
+					: undefined
 				}
 			/>
 			{

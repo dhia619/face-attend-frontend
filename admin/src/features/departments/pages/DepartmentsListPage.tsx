@@ -5,17 +5,19 @@ import DataTable from "../../../components/DataTable/DataTable";
 import ConfirmDialog from "../../../components/ConfirmDialog/ConfirmDialog";
 import Toast from "../../../components/Toast/Toast";
 
-import { useGetDepartments, useDeleteDepartment } from "../../../features/departments/hooks/useDepartments";
+import { useListDepartments, useDeleteDepartment } from "../../../features/departments/hooks/useDepartments";
 import type { Department } from "../../../features/departments/types";
 
 import styles from "../../../styles/ListPage.module.css";
 
 function DepartmentsListPage() {
 
-	const { data: departments = [], isLoading: departmentsLoading } = useGetDepartments();
+	const [departmentToDelete, setDepartmentToDelete] = useState<Department | null>(null);
+	const [page, setPage] = useState<number>(1);
+
+	const { data: departmentsData, isLoading: departmentsLoading } = useListDepartments(page, import.meta.env.VITE_PAGINATION_PAGE_SIZE);
 	const deleteDepartment = useDeleteDepartment();
 	
-	const [departmentToDelete, setDepartmentToDelete] = useState<Department | null>(null);
 
 	return (
 		<div>
@@ -30,7 +32,7 @@ function DepartmentsListPage() {
 				columns={[
 					{ key: "name", header: "Name" },
 				]}
-				rows={departments}
+				rows={departmentsData?.departments ?? []}
 				rowKey={(u) => u.id}
 				isLoading={departmentsLoading}
 				emptyMessage="No departments yet."
@@ -48,6 +50,15 @@ function DepartmentsListPage() {
                             </button>
                         </>
                     )
+				}
+				pagination={
+					departmentsData ? {
+						page: page,
+						pageSize: departmentsData.page_size,
+						hasNext: departmentsData.has_next,
+						onPageChange: setPage,
+					}
+					: undefined
 				}
 			/>
 			{

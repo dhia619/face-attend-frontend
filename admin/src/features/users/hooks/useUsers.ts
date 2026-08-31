@@ -4,8 +4,8 @@ import type { CreateUserPayload, UpdateUserPayload } from "../types";
 
 const USERS_KEY = ["users"];
 
-export function useGetUsers() {
-	return useQuery({ queryKey: USERS_KEY, queryFn: usersApi.list });
+export function useGetUsers(page: number, pageSize: number) {
+	return useQuery({ queryKey: [USERS_KEY, page, pageSize], queryFn: () => usersApi.list(page, pageSize) });
 }
 
 export function useGetUser(id: number) {

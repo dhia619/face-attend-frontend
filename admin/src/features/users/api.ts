@@ -1,8 +1,16 @@
 import { apiClient } from "../../api/client";
-import type { User, CreateUserPayload, UpdateUserPayload } from "./types";
+import type { 
+	User, 
+	CreateUserPayload, 
+	UpdateUserPayload,
+	ListUsersResponse
+} from "./types";
 
 export const usersApi = {
-	list: async () => (await apiClient.get<User[]>("/users")).data,
+	list: async (page?: number, pageSize?: number) => 
+		(await apiClient.get<ListUsersResponse>(
+			`/users?page=${page}&page_size=${pageSize}`)
+		).data,
 	getOne: async (id: number) => (await apiClient.get<User>(`/users/${id}`)).data,
 	create: async (payload: CreateUserPayload) =>
 		(await apiClient.post<User>("/users", payload)).data,

@@ -1,8 +1,14 @@
 import { apiClient } from "../../api/client";
-import type { Device, CreateDevicePayload, UpdateDevicePayload, ActivateDeviceResponse } from "./types";
+import type { 
+    Device, 
+    CreateDevicePayload, 
+    UpdateDevicePayload, 
+    ActivateDeviceResponse,
+    ListDevicesResponse 
+} from "./types";
 
 export const devicesApi = {
-    list: async () => (await apiClient.get<Device[]>("/devices")).data,
+    list: async (page?: number, pageSize?: number) => (await apiClient.get<ListDevicesResponse>(`/devices?page=${page}&page_size=${pageSize}`)).data,
     getOne: async (id: number) => (await apiClient.get<Device>(`/devices/${id}`)).data,
     create: async (payload: CreateDevicePayload) =>
         (await apiClient.post<ActivateDeviceResponse>("/devices", payload)).data,

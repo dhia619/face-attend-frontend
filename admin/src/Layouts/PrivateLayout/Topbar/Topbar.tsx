@@ -1,8 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { useAuth } from "../../../features/auth/AuthContext";
+
 import styles from "./Topbar.module.css";
-import { useLogout } from "../../../features/auth/hooks/useLogout";
+
 import MenuButton from "../../../components/MenuButton/MenuButton";
+
+import { useLogout } from "../../../features/auth/hooks/useLogout";
 
 type TopbarProps = {
 	onSidebarClick: () => void;

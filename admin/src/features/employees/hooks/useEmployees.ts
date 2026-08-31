@@ -4,8 +4,8 @@ import type { CreateEmployeePayload, UpdateEmployeePayload, CreateEmbeddingPaylo
 
 const EMPLOYEES_KEY = ["employees"];
 
-export function useGetEmployees() {
-	return useQuery({ queryKey: EMPLOYEES_KEY, queryFn: employeesApi.list });
+export function useGetEmployees(page: number, pageSize: number) {
+	return useQuery({ queryKey: [ EMPLOYEES_KEY, page, pageSize ], queryFn: () => employeesApi.list(page, pageSize) });
 }
 
 export function useGetEmployee(id: number) {

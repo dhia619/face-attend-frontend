@@ -17,3 +17,10 @@ export interface UpdateDevicePayload {
 export interface ActivateDeviceResponse {
     device_activation_code: string
 }
+
+export interface ListDevicesResponse {
+    devices: Device[]
+    page: number
+    page_size: number
+    has_next: boolean
+}

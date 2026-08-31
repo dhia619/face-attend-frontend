@@ -3,11 +3,13 @@ import type {
     Employee, 
     CreateEmployeePayload, 
     UpdateEmployeePayload,
-    CreateEmbeddingPayload 
+    CreateEmbeddingPayload,
+    ListEmployeesResponse
 } from "./types";
 
 export const employeesApi = {
-    list: async () => (await apiClient.get<Employee[]>("/employees")).data,
+    list: async (page?: number, pageSize?: number) => 
+        (await apiClient.get<ListEmployeesResponse>(`/employees?page=${page}&page_size=${pageSize}`)).data,
     getOne: async (id: number) => (await apiClient.get<Employee>(`/employees/${id}`)).data,
     create: async (payload: CreateEmployeePayload) =>
         (await apiClient.post<Employee>("/employees", payload)).data,

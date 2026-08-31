@@ -19,3 +19,10 @@ export interface UpdateUserPayload {
     email: string;
     role_id: number;
 }
+
+export interface ListUsersResponse {
+    employees: User[]
+    page: number
+    page_size: number
+    has_next: boolean
+}
