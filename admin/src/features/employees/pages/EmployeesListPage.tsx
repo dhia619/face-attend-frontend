@@ -84,7 +84,12 @@ function EmployeesListPage() {
 			{employeeToDelete && (
 				<ConfirmDialog
 					title="Delete employee"
-					message={`Are you sure you want to delete ${employeeToDelete.full_name}?`}
+					message={
+						<>
+							Are you sure you want to delete{" "}
+							<span className={styles.highlight}>{employeeToDelete.full_name}</span> ?
+						</>
+					}
 					isLoading={deleteEmployee.isPending}
 					onCancel={() => setEmployeeToDelete(null)}
 					onConfirm={() =>

@@ -3,7 +3,7 @@ import styles from "./ConfirmDialog.module.css";
 
 type ConfirmDialogProps = {
 	title: string;
-	message: string;
+	message: React.ReactNode;
 	onConfirm: () => void;
 	onCancel: () => void;
 	isLoading?: boolean;

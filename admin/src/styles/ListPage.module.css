@@ -114,3 +114,8 @@
 	color: var(--status-disabled-text);
 	background-color: var(--status-disabled-bg);
 }
+
+.highlight {
+    font-weight: 600;
+    color: var(--color-red);
+}

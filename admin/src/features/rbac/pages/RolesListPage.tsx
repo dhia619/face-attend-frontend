@@ -67,7 +67,12 @@ function RolesListPage() {
 			{RoleToDelete && (
 				<ConfirmDialog
 					title="Delete Role"
-					message={`Are you sure you want to delete ${RoleToDelete.name}?`}
+					message={
+						<>
+							Are you sure you want to delete{" "}
+							<span className={styles.highlight}>{RoleToDelete.name}</span> ?
+						</>
+					}
 					isLoading={deleteRole.isPending}
 					onCancel={() => setRoleToDelete(null)}
 					onConfirm={() =>

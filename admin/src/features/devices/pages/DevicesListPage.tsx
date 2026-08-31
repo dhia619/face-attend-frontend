@@ -139,7 +139,12 @@ function DevicesListPage() {
 			{deviceToDelete && (
 				<ConfirmDialog
 					title="Delete device"
-					message={`Are you sure you want to delete ${deviceToDelete.name}?`}
+					message={
+						<>
+							Are you sure you want to delete{" "}
+							<span className={styles.highlight}>{deviceToDelete.name}</span> ?
+						</>
+					}
 					isLoading={deleteDevice.isPending}
 					onCancel={() => setDeviceToDelete(null)}
 					onConfirm={() =>

@@ -68,7 +68,12 @@ function DepartmentsListPage() {
 			{departmentToDelete && (
 				<ConfirmDialog
 					title="Delete department"
-					message={`Are you sure you want to delete ${departmentToDelete.name}?`}
+					message={
+						<>
+							Are you sure you want to delete{" "}
+							<span className={styles.highlight}>{departmentToDelete.name}</span> ?
+						</>
+					}
 					isLoading={deleteDepartment.isPending}
 					onCancel={() => setDepartmentToDelete(null)}
 					onConfirm={() =>

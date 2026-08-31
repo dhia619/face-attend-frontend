@@ -76,7 +76,12 @@ function UsersListPage() {
 			{userToDelete && (
 				<ConfirmDialog
 					title="Delete user"
-					message={`Are you sure you want to delete ${userToDelete.full_name}?`}
+					message={
+						<>
+							Are you sure you want to delete{" "}
+							<span className={styles.highlight}>{userToDelete.full_name}</span> ?
+						</>
+					}
 					isLoading={deleteUser.isPending}
 					onCancel={() => setUserToDelete(null)}
 					onConfirm={() =>
