@@ -1,0 +1,67 @@
+.employee {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-weight: 600;
+	color: var(--color-text-dark);
+}
+
+.avatar {
+	display: grid;
+	place-items: center;
+	width: 34px;
+	height: 34px;
+	border-radius: 50%;
+	background: var(--color-sidebar);
+	color: var(--color-white);
+	font-size: 13px;
+}
+
+.status {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	padding: 5px 9px;
+	border-radius: 999px;
+	font-size: 12px;
+	font-weight: 600;
+	text-transform: capitalize;
+}
+
+.statusDot {
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: currentColor;
+}
+
+.statusIn {
+	background: var(--status-active-bg);
+	color: var(--status-active-text);
+}
+
+.statusOut {
+	background: var(--status-pending-bg);
+	color: var(--status-pending-text);
+}
+
+.statusMissing, .statusNotArrived {
+	background: var(--status-disabled-bg);
+	color: var(--status-disabled-text);
+}
+
+.department {
+	display: inline-block;
+	padding: 5px 9px;
+	border-radius: 7px;
+	background: var(--color-gray-light);
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--color-text-medium);
+}
+
+@media (max-width: 1050px) {
+	.stats {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}

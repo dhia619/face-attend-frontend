@@ -71,6 +71,7 @@ function DataTable<T extends Record<string, any>>({
 					</tbody>
 				</table>
 			</div>
+			{pagination && 
 				<div className={styles.pagination}>
 					<button
 						disabled={pagination.page === 1}
@@ -94,6 +95,7 @@ function DataTable<T extends Record<string, any>>({
 						Next
 					</button>
 				</div>
+			}
 		</>
 	);
 }

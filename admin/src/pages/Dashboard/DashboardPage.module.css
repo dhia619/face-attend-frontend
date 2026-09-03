@@ -1,0 +1,395 @@
+
+.page {
+	padding-inline: 10px;
+	min-height: 100%;
+	color: var(--color-text-dark);
+}
+
+.loaderWrapper {
+	min-height: 400px;
+	display: grid;
+	place-items: center;
+}
+
+/* Header */
+
+.header {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 24px;
+	margin-bottom: 28px;
+}
+
+.eyebrow {
+	margin: 0 0 7px;
+	font-size: 12px;
+	font-weight: 700;
+	color: var(--color-turquoise-green);
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+}
+
+.title {
+	margin: 0;
+	font-size: 30px;
+	font-weight: 700;
+	line-height: 1.1;
+}
+
+.date {
+	margin: 7px 0 0;
+	font-size: 14px;
+	color: var(--color-text-muted);
+}
+
+/* Stats */
+
+.stats {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 18px;
+	margin-bottom: 24px;
+}
+
+.statCard {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	padding: 22px;
+	background: var(--color-white);
+	border: 1px solid var(--color-table-border);
+	border-radius: 14px;
+	box-shadow: 0 1px 3px var(--color-dialog-box-shadow);
+}
+
+.statIcon {
+	display: grid;
+	place-items: center;
+	width: 44px;
+	height: 44px;
+	flex-shrink: 0;
+	border-radius: 12px;
+	background: var(--color-gray-light);
+}
+
+.statIcon span {
+	width: 11px;
+	height: 11px;
+	border-radius: 50%;
+	background: var(--color-gray-medium);
+}
+
+.statValue {
+	display: block;
+	margin-bottom: 3px;
+	font-size: 26px;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.statLabel {
+	margin: 0;
+	font-size: 14px;
+	color: var(--color-text-muted);
+}
+
+.success .statIcon {
+	background: var(--status-active-bg);
+}
+
+.success .statIcon span {
+	background: var(--status-active-text);
+}
+
+.info .statIcon {
+	background: rgba(37, 176, 155, 0.14);
+}
+
+.info .statIcon span {
+	background: var(--color-turquoise-green);
+}
+
+.warning .statIcon {
+	background: var(--status-pending-bg);
+}
+
+.warning .statIcon span {
+	background: var(--status-pending-text);
+}
+
+/* Overview */
+
+.overviewRow {
+	display: grid;
+	grid-template-columns:
+		minmax(220px, 0.8fr)
+		minmax(300px, 1.2fr)
+		minmax(240px, 1fr);
+	gap: 18px;
+	margin-bottom: 24px;
+}
+
+.overviewCard,
+.compactOverviewCard {
+	min-width: 0;
+	padding: 20px 22px;
+	background: var(--color-white);
+	border: 1px solid var(--color-table-border);
+	border-radius: 14px;
+	box-shadow: 0 1px 3px var(--color-dialog-box-shadow);
+}
+
+.overviewHeader {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 16px;
+	margin-bottom: 20px;
+}
+
+.overviewTitle {
+	margin: 0;
+	font-size: 16px;
+	font-weight: 700;
+}
+
+.overviewSubtitle {
+	margin: 5px 0 0;
+	font-size: 13px;
+	line-height: 1.45;
+	color: var(--color-text-muted);
+}
+
+/* Current presence */
+
+.compactPresenceGrid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 10px;
+}
+
+.compactPresenceItem {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 12px 14px;
+	border-radius: 10px;
+}
+
+.compactPresenceItem.in {
+	background: var(--status-active-bg);
+}
+
+.compactPresenceItem.out {
+	background: var(--status-pending-bg);
+}
+
+.compactPresenceItem.in .presenceStatusDot {
+	background: var(--status-active-text);
+}
+
+.compactPresenceItem.out .presenceStatusDot {
+	background: var(--status-pending-text);
+}
+
+.presenceStatusDot {
+	width: 10px;
+	height: 10px;
+	flex-shrink: 0;
+	border-radius: 50%;
+}
+
+.compactPresenceValue {
+	display: block;
+	margin-bottom: 3px;
+	font-size: 22px;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.presenceLabel {
+	display: block;
+	font-size: 13px;
+	color: var(--color-text-muted);
+}
+
+/* Late */
+
+.lateStats {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 12px;
+}
+
+.lateMetric,
+.lateTimeMetric {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	padding: 14px 16px;
+	border-radius: 10px;
+	background: var(--status-pending-bg);
+}
+
+.lateValue,
+.lateTimeValue {
+	font-size: 28px;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.lateValue {
+	color: var(--status-pending-text);
+}
+
+.lateTimeValue {
+	color: var(--color-text-dark);
+}
+
+.lateLabel {
+	font-size: 12px;
+	color: var(--color-text-muted);
+}
+
+/* Attendance rate */
+
+.rateContent {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.rateValue {
+	font-size: 34px;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.rateProgress {
+	height: 7px;
+	overflow: hidden;
+	border-radius: 999px;
+	background: var(--color-gray-light);
+}
+
+.rateProgressBar {
+	height: 100%;
+	border-radius: inherit;
+	background: var(--status-active-text);
+}
+
+.rateLabel {
+	font-size: 12px;
+	color: var(--color-text-muted);
+}
+
+/* Attendance table */
+
+.tableSection {
+	overflow: hidden;
+	background: var(--color-white);
+	border: 1px solid var(--color-table-border);
+	border-radius: 14px;
+	box-shadow: 0 1px 3px var(--color-dialog-box-shadow);
+}
+
+.sectionHeader {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 20px;
+	padding: 22px 24px;
+	border-bottom: 1px solid var(--color-table-border);
+}
+
+.sectionHeader h2 {
+	margin: 0 0 4px;
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.sectionHeader p {
+	margin: 0;
+	font-size: 13px;
+	color: var(--color-text-muted);
+}
+
+.employeeCount {
+	flex-shrink: 0;
+	padding: 7px 11px;
+	border-radius: 8px;
+	background: var(--color-gray-light);
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--color-text-muted);
+}
+
+/* Responsive */
+
+@media (max-width: 1100px) {
+	.stats {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.overviewRow {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.compactOverviewCard {
+		grid-column: 1 / -1;
+	}
+}
+
+@media (max-width: 700px) {
+	.page {
+		padding: 20px 16px;
+	}
+
+	.header,
+	.sectionHeader {
+		align-items: flex-start;
+		flex-direction: column;
+	}
+
+	.header {
+		margin-bottom: 22px;
+	}
+
+	.title {
+		font-size: 26px;
+	}
+
+	.stats,
+	.overviewRow {
+		grid-template-columns: 1fr;
+	}
+
+	.stats {
+		gap: 12px;
+	}
+
+	.overviewRow {
+		gap: 14px;
+	}
+
+	.compactOverviewCard {
+		grid-column: auto;
+	}
+
+	.overviewCard,
+	.compactOverviewCard {
+		padding: 18px;
+	}
+
+	.employeeCount {
+		align-self: flex-start;
+	}
+}
+
+@media (max-width: 450px) {
+	.compactPresenceGrid,
+	.lateStats {
+		grid-template-columns: 1fr;
+	}
+}	
