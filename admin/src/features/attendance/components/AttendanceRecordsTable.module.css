@@ -1,0 +1,56 @@
+.employee {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	min-width: 0;
+}
+
+.avatar {
+	display: grid;
+	place-items: center;
+	width: 34px;
+	height: 34px;
+	flex-shrink: 0;
+	border-radius: 50%;
+	background: var(--color-sidebar);
+	color: var(--color-white);
+	font-size: 12px;
+	font-weight: 700;
+}
+
+.employeeName {
+	font-weight: 600;
+	color: var(--color-text-dark);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	padding: 5px 10px;
+	border-radius: 999px;
+	font-size: 12px;
+	font-weight: 600;
+	white-space: nowrap;
+}
+
+.dot {
+	width: 6px;
+	height: 6px;
+	flex-shrink: 0;
+	border-radius: 50%;
+	background: currentColor;
+}
+
+.in {
+	background: var(--status-active-bg);
+	color: var(--status-active-text);
+}
+
+.out {
+	background: var(--status-pending-bg);
+	color: var(--status-pending-text);
+}

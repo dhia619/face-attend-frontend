@@ -1,0 +1,118 @@
+.filters {
+	margin-bottom: 20px;
+	padding: 16px 18px;
+	background: var(--color-white);
+	border: 1px solid var(--color-table-border);
+	border-radius: 14px;
+	box-shadow: 0 1px 3px var(--color-dialog-box-shadow);
+}
+
+.filtersHeader {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	margin-bottom: 12px;
+}
+
+.filtersTitle {
+	font-size: 13px;
+	font-weight: 700;
+	color: var(--color-text-dark);
+}
+
+.controls {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	gap: 12px;
+}
+
+.field {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.field label {
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--color-text-muted);
+}
+
+.field select,
+.field input {
+	height: 38px;
+	padding: 0 12px;
+	font-size: 13px;
+	font-weight: 500;
+	color: var(--color-text-dark);
+	background: var(--color-gray-50);
+	border: 1px solid var(--color-gray-border);
+	border-radius: 5px;
+	outline: none;
+	transition:
+		border-color 0.15s ease,
+		box-shadow 0.15s ease;
+	font-family: inherit;
+}
+
+.field select {
+	min-width: 180px;
+	cursor: pointer;
+}
+
+.field input[type="date"] {
+	min-width: 155px;
+}
+
+.field select:focus,
+.field input:focus {
+	border-color: var(--color-turquoise-green);
+	box-shadow: 0 0 0 2px
+		color-mix(in srgb, var(--color-turquoise-green) 12%, transparent);
+}
+
+.clearButton {
+	padding: 6px 10px;
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--color-text-muted);
+	background: transparent;
+	border: 0;
+	border-radius: 7px;
+	cursor: pointer;
+	transition:
+		background 0.15s ease,
+		color 0.15s ease;
+}
+
+.clearButton:hover {
+	color: var(--color-text-dark);
+	background: var(--color-gray-light);
+}
+
+@media (max-width: 700px) {
+	.filters {
+		padding: 14px;
+	}
+
+	.filtersHeader {
+		margin-bottom: 14px;
+	}
+
+	.controls {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.field {
+		width: 100%;
+	}
+
+	.field select,
+	.field input {
+		width: 100%;
+		min-width: 0;
+	}
+}

@@ -1,5 +1,9 @@
 import { apiClient } from "../../api/client";
-import type { TodayAttendaceResponse } from "./types";
+import type { 
+	AttendanceFilters, 
+	ListAttendanceRecordsResponse, 
+	TodayAttendaceResponse 
+} from "./types";
 
 export const attendanceApi = {
 	getTodayAttendance: async (department_id?: number) => {
@@ -11,4 +15,12 @@ export const attendanceApi = {
 			})
 		).data;
 	},
+
+	listAttendanceRecords: async (filters: AttendanceFilters) => {
+		return (
+			await apiClient.get<ListAttendanceRecordsResponse>("/attendance", {
+				params: filters
+			})
+		).data
+	}
 };

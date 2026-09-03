@@ -22,6 +22,7 @@ import EditDepartmentPage from "../features/departments/pages/EditDepartmentPage
 import DevicesListPage from "../features/devices/pages/DevicesListPage";
 import CreateDevicePage from "../features/devices/pages/CreateDevicePage";
 import EditDevicePage from "../features/devices/pages/EditDevicePage";
+import AttendancePage from "../features/attendance/pages/AttendancePage";
 
 export const router = createBrowserRouter([
 	
@@ -60,6 +61,7 @@ export const router = createBrowserRouter([
 			{ path: "devices", Component: DevicesListPage },
 			{ path: "devices/new", Component: CreateDevicePage },
 			{ path: "devices/:id/edit", Component: EditDevicePage },
+			{ path: "attendance", Component: AttendancePage },
 
 		],
 	},
