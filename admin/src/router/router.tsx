@@ -23,6 +23,9 @@ import DevicesListPage from "../features/devices/pages/DevicesListPage";
 import CreateDevicePage from "../features/devices/pages/CreateDevicePage";
 import EditDevicePage from "../features/devices/pages/EditDevicePage";
 import AttendancePage from "../features/attendance/pages/AttendancePage";
+import ShiftsListPage from "../features/shifts/pages/ShiftsListPage";
+import CreateShiftPage from "../features/shifts/pages/CreateShiftPage";
+import EditShiftPage from "../features/shifts/pages/EditShiftPage";
 
 export const router = createBrowserRouter([
 	
@@ -62,7 +65,9 @@ export const router = createBrowserRouter([
 			{ path: "devices/new", Component: CreateDevicePage },
 			{ path: "devices/:id/edit", Component: EditDevicePage },
 			{ path: "attendance", Component: AttendancePage },
-
+			{ path: "shifts", Component: ShiftsListPage },
+			{ path: "shifts/new", Component: CreateShiftPage },
+			{ path: "shifts/:id/edit", Component: EditShiftPage },
 		],
 	},
 	

@@ -9,6 +9,7 @@ const navItems = [
 	{ to: "/roles", label: "Roles" },
 	{ to: "/devices", label: "Devices" },
 	{ to: "/attendance", label: "Attendance" },
+	{ to: "/shifts", label: "Shifts" },
 ];
 
 type SidebarProps = {
