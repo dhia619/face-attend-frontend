@@ -5,7 +5,7 @@ import type { CreateDevicePayload, UpdateDevicePayload } from "../types";
 const DEVICES_KEY = ["devices"];
 
 export function useGetDevices(page?: number, pageSize?: number) {
-	return useQuery({ queryKey: [DEVICES_KEY, page, pageSize], queryFn: () => devicesApi.list(page, pageSize) });
+	return useQuery({ queryKey: [...DEVICES_KEY, page, pageSize], queryFn: () => devicesApi.list(page, pageSize) });
 }
 
 export function useGetDevice(id: number) {

@@ -5,7 +5,7 @@ import type { CreateRolePayload, UpdateRolePayload } from "../types";
 const ROLES_KEY = ["roles"];
 
 export function useListRoles(page: number, pageSize: number) {
-	return useQuery({ queryKey: [ROLES_KEY, page, pageSize], queryFn: () => rolesApi.list(page, pageSize) });
+	return useQuery({ queryKey: [...ROLES_KEY, page, pageSize], queryFn: () => rolesApi.list(page, pageSize) });
 }
 
 export function useGetAllRoles() {

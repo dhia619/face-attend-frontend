@@ -5,7 +5,7 @@ import type { CreateDepartmentPayload, UpdateDepartmentPayload } from "../types"
 const DEPARTMENTS_KEY = ["departments"];
 
 export function useListDepartments(page: number, pageSize: number) {
-	return useQuery({ queryKey: [DEPARTMENTS_KEY, page, pageSize], queryFn: () => departmentsApi.list(page, pageSize) });
+	return useQuery({ queryKey: [...DEPARTMENTS_KEY, page, pageSize], queryFn: () => departmentsApi.list(page, pageSize) });
 }
 
 export function useGetAllDepartments() {
