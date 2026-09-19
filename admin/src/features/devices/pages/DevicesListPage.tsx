@@ -50,27 +50,49 @@ function DevicesListPage() {
 						header: "Name",
 					},
 					{
+						key: "type",
+						header: "Type",
+						render: (row) => {
+							switch (row.type) {
+								case "kiosk":
+									return (
+										<span className={`${styles.badge} ${styles.typeKiosk}`}>
+											Kiosk
+										</span>
+									);
+								case "ip-camera":
+									return (
+										<span className={`${styles.badge} ${styles.typeIpCamera}`}>
+											IP
+										</span>
+									);
+								default:
+									return <span>{row.type}</span>;
+							}
+						}
+					},
+					{
 						key: "status",
 						header: "Status",
 						render: (row) => {
 							switch (row.status) {
 								case "active":
 									return (
-										<span className={`${styles.statusBadge} ${styles.statusActive}`}>
+										<span className={`${styles.badge} ${styles.statusActive}`}>
 											Active
 										</span>
 									);
 
 								case "pending":
 									return (
-										<span className={`${styles.statusBadge} ${styles.statusPending}`}>
+										<span className={`${styles.badge} ${styles.statusPending}`}>
 											Pending
 										</span>
 									);
 
 								case "disabled":
 									return (
-										<span className={`${styles.statusBadge} ${styles.statusDisabled}`}>
+										<span className={`${styles.badge} ${styles.statusDisabled}`}>
 											Disabled
 										</span>
 									);

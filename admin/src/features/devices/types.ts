@@ -3,15 +3,20 @@ export interface Device {
     id: number
     name: string
     status: string
+    type?: string
+    rtsp_url?: string
 }
 
 export interface CreateDevicePayload {
     name: string
+    type: string
+    rtsp_url?: string
 }
 
 export interface UpdateDevicePayload {
-    name: string | undefined
-    enabled: boolean | undefined
+    name?: string
+    enabled?: boolean
+    rtsp_url?: string
 }
 
 export interface ActivateDeviceResponse {

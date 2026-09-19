@@ -14,6 +14,7 @@ function EditDevicePage() {
     const deviceId = Number(id);
 
     const { data: device, isLoading: deviceLoading } = useGetDevice(deviceId);
+
     const updateDevice = useUpdateDevice();
 
     const [isEnabled, setIsEnabled] = useState<boolean | null>(null);
@@ -62,15 +63,20 @@ function EditDevicePage() {
 
     return (
         <div className={styles.main}>
+            {updateDevice.isSuccess && (
+                <Toast message="Device updated successfully" />
+            )}
 
             {updateDevice.isError && (
                 <Toast
                     type="error"
                     message={
                         updateDevice.error?.response?.status === 422
-                            ? updateDevice.error?.response?.data?.detail?.[0]?.field +
+                            ? updateDevice.error?.response?.data?.detail?.[0]
+                                  ?.field +
                               " " +
-                              updateDevice.error?.response?.data?.detail?.[0]?.message
+                              updateDevice.error?.response?.data?.detail?.[0]
+                                  ?.message
                             : updateDevice.error?.response?.data?.detail ??
                               "An error occurred while updating device"
                     }
@@ -79,7 +85,8 @@ function EditDevicePage() {
 
             <div className={styles.deviceHeader}>
                 <p className={styles.title}>Edit Device</p>
-                { device.status !== "pending" &&
+
+                {device.status !== "pending" && (
                     <div className={styles.toggleGroup}>
                         <span
                             className={
@@ -88,7 +95,9 @@ function EditDevicePage() {
                                     : styles.deviceDisabled
                             }
                         >
-                            {enabled ? "Camera enabled" : "Camera disabled"}
+                            {enabled
+                                ? "Camera enabled"
+                                : "Camera disabled"}
                         </span>
 
                         <button
@@ -104,13 +113,15 @@ function EditDevicePage() {
                             <span className={styles.toggleThumb} />
                         </button>
                     </div>
-                }
+                )}
             </div>
 
             <DeviceForm
                 mode="edit"
                 initialValues={{
                     deviceName: device.name,
+                    deviceType: device.type,
+                    url: device.rtsp_url ?? "",
                 }}
                 isPending={updateDevice.isPending}
                 onSubmit={(values) =>
@@ -118,6 +129,9 @@ function EditDevicePage() {
                         id: deviceId,
                         payload: {
                             name: values.deviceName,
+                            ...(values.deviceType === "ip-camera" && {
+                                rtsp_url: values.url,
+                            }),
                         },
                     })
                 }

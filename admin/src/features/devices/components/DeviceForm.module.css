@@ -1,0 +1,76 @@
+.deviceTypeOptions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.deviceTypeOption {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    padding: 16px;
+
+    border: 1px solid #d9dde5;
+    border-radius: 10px;
+
+    background: #fff;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.deviceTypeOption:hover {
+    border-color: #9ca3af;
+}
+
+.deviceTypeOption input[type="radio"] {
+    width: 18px;
+    height: 18px;
+
+    margin-top: 2px;
+
+    cursor: pointer;
+
+    accent-color: #2563eb;
+}
+
+.deviceTypeOption > div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.deviceTypeOption strong {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.deviceTypeOption span {
+    font-size: 13px;
+    line-height: 1.4;
+    color: #6b7280;
+}
+
+.selected {
+    border-color: #2563eb;
+    background: #eff6ff;
+    box-shadow: 0 0 0 1px #2563eb;
+}
+
+.selected strong {
+    color: #1d4ed8;
+}
+
+@media (max-width: 600px) {
+    .deviceTypeOptions {
+        grid-template-columns: 1fr;
+    }
+}
+

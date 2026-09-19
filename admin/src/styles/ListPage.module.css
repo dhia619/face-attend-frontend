@@ -91,7 +91,7 @@
     outline-offset: 2px;
 }
 
-.statusBadge {
+.badge {
 	display: inline-flex;
 	align-items: center;
 	padding: 4px 10px;
@@ -118,4 +118,14 @@
 .highlight {
     font-weight: 600;
     color: var(--color-red);
+}
+
+.typeKiosk {
+	color: #0e7490;
+	background-color: #cffafe;
+}
+
+.typeIpCamera {
+	color: #6d28d9;
+	background-color: #ede9fe;
 }
